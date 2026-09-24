@@ -1,0 +1,1 @@
+name="win32 svcready user agent" rule="service = 80,443 && direction = 'outbound' && (client = 'svc/1.0' || user.agent = 'svc/1.0')" alert=boc order=1 type=application

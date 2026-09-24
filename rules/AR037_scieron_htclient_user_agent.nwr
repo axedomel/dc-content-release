@@ -1,0 +1,1 @@
+name="scieron htclient user agent" rule="service = 80,443 && direction = 'outbound' && (client begins 'HTClient;' || user.agent begins 'HTClient;')" alert=boc order=1 type=application

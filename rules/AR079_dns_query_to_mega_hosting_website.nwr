@@ -1,0 +1,1 @@
+name="dns query to mega hosting website" rule="alias.host contains 'userstorage.mega.co.nz' || domain contains 'userstorage.mega.co.nz' || domain.dst contains 'userstorage.mega.co.nz' || url contains 'userstorage.mega.co.nz'" alert=boc order=1 type=application

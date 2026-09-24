@@ -1,0 +1,1 @@
+name="xwiki solrsearch groovy rce (cve-2025-24893)" rule="directory contains 'bin/get/main/solrsearch' && query contains 'groovy' && query contains '.execute()'" alert=boc order=1 type=application

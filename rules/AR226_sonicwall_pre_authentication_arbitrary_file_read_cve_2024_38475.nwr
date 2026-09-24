@@ -1,0 +1,1 @@
+name="sonicwall pre-authentication arbitrary file read (cve-2024-38475)" rule="directory contains 'tmp/temp.db%3f','mnt/ram/var/log/httpd.log%3f'" alert=boc order=1 type=application

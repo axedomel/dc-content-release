@@ -1,0 +1,1 @@
+name="llm c2 beacon pattern" rule="(threat.category = 'llm-provider','llm-enterprise') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && analysis.session = 'potential beacon' && analysis.session = 'session size 0-5k'" alert=boc order=1 type=application

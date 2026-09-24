@@ -1,0 +1,1 @@
+name="gcleaner pup user agent" rule="service = 80,443 && direction = 'outbound' && (client = 'TAKEMIX','TAKEMIXTWO' || user.agent = 'TAKEMIX','TAKEMIXTWO')" alert=boc order=1 type=application

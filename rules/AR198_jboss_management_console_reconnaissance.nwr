@@ -1,0 +1,1 @@
+name="jboss management console reconnaissance" rule="action = 'get', 'head' && directory contains 'web-console/serverinfo.jsp','web-console','jmx-console','invoker'" alert=boc order=1 type=application

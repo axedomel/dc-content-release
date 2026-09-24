@@ -1,0 +1,1 @@
+name="coinminer ja3 fingerprint" rule="direction = 'outbound' && ja3 = '40adfd923eb82b89d8836ba37a19bca1'" alert=ioc order=1 type=application

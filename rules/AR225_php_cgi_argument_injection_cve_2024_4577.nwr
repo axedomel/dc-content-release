@@ -1,0 +1,1 @@
+name="php-cgi argument injection (cve-2024-4577)" rule="action = 'post' && query contains 'cgi.force_redirect%3d0' && query contains 'auto_prepend_file%3dphp://input'" alert=boc order=1 type=application

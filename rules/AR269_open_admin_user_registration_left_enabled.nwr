@@ -1,0 +1,1 @@
+name="open admin/user registration left enabled" rule="action = 'get' && (directory ends 'user/sign_up','sign-up','register' || directory contains 'identity/account/register','account/register')" alert=eoc order=1 type=application

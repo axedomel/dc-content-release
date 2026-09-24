@@ -1,0 +1,1 @@
+name="loadmoney pup installer" rule="service = 80,443 && direction = 'outbound' && (client contains 'tiny-dl' || user.agent contains 'tiny-dl')" alert=ioc order=1 type=application

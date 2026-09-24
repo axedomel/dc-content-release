@@ -1,0 +1,1 @@
+name="exfiltration via chat platform webhook" rule="action = 'post' && ((alias.host = 'discord.com','discordapp.com','canary.discord.com','ptb.discord.com' && directory contains 'api/webhooks') || (alias.host = 'hooks.slack.com' && directory contains 'services') || alias.host contains '.webhook.office.com')" alert=boc order=1 type=application

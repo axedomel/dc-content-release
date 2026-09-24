@@ -1,0 +1,1 @@
+name="local llm service exposed" rule="(tcp.dstport = 11434 || tcp.dstport = 11435 || tcp.dstport = 1234 || tcp.dstport = 1337 || tcp.dstport = 5001 || tcp.dstport = 5000) && direction = 'inbound'" alert=ioc order=1 type=application

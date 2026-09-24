@@ -1,0 +1,1 @@
+name="quakbot ja3 fingerprint set" rule="direction = 'outbound' && ja3 = '3cda52da4ade09f1f781ad2e82dcfa20','7dd50e112cd23734a310b90f6f44a7cd'" alert=ioc order=1 type=application

@@ -1,0 +1,1 @@
+name="suspicious dns query indicating kerberos coercion via dns object spn spoofing" rule="alias.host contains 'UWhRCA' && alias.host contains 'BAAAA'" alert=ioc order=1 type=application

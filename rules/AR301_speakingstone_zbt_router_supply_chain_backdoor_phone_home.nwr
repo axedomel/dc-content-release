@@ -1,0 +1,1 @@
+name="speakingstone zbt router supply-chain backdoor phone-home" rule="direction = 'outbound' && alias.host = 'ac-link.com','www.findmyipaddr.com' && udp.dstport = 10000" alert=boc order=1 type=application

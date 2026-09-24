@@ -1,0 +1,1 @@
+name="new kind of network (nkn) detection" rule="(alias.host contains 'seed' && alias.host contains '.nkn.org') || (domain contains 'seed' && domain contains '.nkn.org') || (domain.dst contains 'seed' && domain.dst contains '.nkn.org') || (url contains 'seed' && url contains '.nkn.org')" alert=boc order=1 type=application

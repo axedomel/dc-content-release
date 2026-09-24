@@ -1,0 +1,1 @@
+name="oauth/auth json configuration exposure" rule="action = 'get' && (filename = 'auth.json','.auth.json' || directory ends 'config/auth.json','configs/auth.json','configuration/auth.json','api/auth.json','app/auth.json')" alert=eoc order=1 type=application

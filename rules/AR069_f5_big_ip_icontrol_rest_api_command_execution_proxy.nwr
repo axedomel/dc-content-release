@@ -1,0 +1,1 @@
+name="f5 big-ip icontrol rest api command execution - proxy" rule="action = 'POST' && directory contains '/mgmt/tm/util' && filename = 'bash'" alert=boc order=1 type=application

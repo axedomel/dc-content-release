@@ -1,0 +1,1 @@
+name="rejetto http file server macro template injection (cve-2024-23692)" rule="query contains 'search=%25xxx%25url%25'" alert=boc order=1 type=application

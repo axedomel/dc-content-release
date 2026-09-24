@@ -1,0 +1,1 @@
+name="spring4shell public poc webshell filename request" rule="action = 'get' && filename = 'tomcatwar.jsp','poc.jsp','shell.jsp'" alert=boc order=1 type=application

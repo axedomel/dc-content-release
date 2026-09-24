@@ -1,0 +1,1 @@
+name="pwndrp access" rule="directory contains '/pwndrop/'" alert=ioc order=1 type=application

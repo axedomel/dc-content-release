@@ -1,0 +1,1 @@
+name="tomcat partial-put session deserialization attempt" rule="action = 'get' && cookie begins 'jsessionid=.'" alert=boc order=1 type=application

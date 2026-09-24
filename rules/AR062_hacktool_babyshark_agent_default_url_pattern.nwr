@@ -1,0 +1,1 @@
+name="hacktool - babyshark agent default url pattern" rule="filename = 'momyshark' && query begins 'key='" alert=ioc order=1 type=application

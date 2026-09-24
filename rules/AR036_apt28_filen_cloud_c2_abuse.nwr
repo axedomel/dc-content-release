@@ -1,0 +1,1 @@
+name="apt28 filen cloud c2 abuse" rule="alias.host = 'gateway.filen.io','ingest.filen.io','egest.filen.io' || domain = 'gateway.filen.io','ingest.filen.io','egest.filen.io' || domain.dst = 'gateway.filen.io','ingest.filen.io','egest.filen.io' || url = 'gateway.filen.io','ingest.filen.io','egest.filen.io'" alert=boc order=1 type=application

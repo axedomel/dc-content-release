@@ -1,0 +1,1 @@
+name="confluence setup-status privilege escalation (cve-2023-22515)" rule="action = 'get' && directory contains 'server-info.action' && query contains 'setupcomplete=false','setupcomplete=0'" alert=boc order=1 type=application

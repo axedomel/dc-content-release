@@ -1,0 +1,1 @@
+name="llm browser access" rule="(threat.category = 'llm-provider','llm-enterprise','llm-coding') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && client contains 'Mozilla/'" alert=eoc order=1 type=application

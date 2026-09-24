@@ -1,0 +1,1 @@
+name="llm file upload" rule="(threat.category = 'llm-provider','llm-enterprise','llm-coding') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && action = 'post' && (attachment exists || analysis.session = 'medium transmitted outbound')" alert=boc order=1 type=application

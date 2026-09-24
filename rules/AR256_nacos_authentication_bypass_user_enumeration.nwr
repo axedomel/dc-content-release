@@ -1,0 +1,1 @@
+name="nacos authentication bypass user enumeration" rule="directory contains 'nacos/v1/auth/users' && query contains 'pagesize=10' && query contains 'accesstoken='" alert=eoc order=1 type=application

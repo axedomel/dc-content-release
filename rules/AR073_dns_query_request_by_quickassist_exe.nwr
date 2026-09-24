@@ -1,0 +1,1 @@
+name="dns query request by quickassist.exe" rule="alias.host ends 'remoteassistance.support.services.microsoft.com' || domain ends 'remoteassistance.support.services.microsoft.com' || domain.dst ends 'remoteassistance.support.services.microsoft.com' || url ends 'remoteassistance.support.services.microsoft.com'" alert=boc order=1 type=application

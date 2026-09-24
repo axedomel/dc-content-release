@@ -1,0 +1,1 @@
+name="Lateral Service OTHER Between Internal Hosts" rule="service = 0 && direction = 'lateral' && tcp.flags.desc = 'syn' && tcp.flags.desc = 'ack'" alert=boc order=1 type=application

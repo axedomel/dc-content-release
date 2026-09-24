@@ -1,0 +1,1 @@
+name="large icmp traffic to public destination" rule="ip.proto = 1 && direction = 'outbound' && (payload > 1000 || filename exists || filetype exists)" alert=boc order=1 type=application

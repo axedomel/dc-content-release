@@ -1,0 +1,1 @@
+name="simplehelp allversions privilege escalation disclosure (cve-2024-57726)" rule="directory contains 'allversions'" alert=eoc order=1 type=application

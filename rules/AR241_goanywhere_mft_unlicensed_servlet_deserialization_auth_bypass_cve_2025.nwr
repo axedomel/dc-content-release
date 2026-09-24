@@ -1,0 +1,1 @@
+name="goanywhere mft unlicensed-servlet deserialization auth bypass (cve-2025-10035)" rule="directory contains 'license/unlicensed.xhtml' && query contains 'garequestaction=activate'" alert=boc order=1 type=application

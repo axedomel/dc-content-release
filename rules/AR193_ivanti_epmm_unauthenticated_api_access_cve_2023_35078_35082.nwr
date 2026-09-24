@@ -1,0 +1,1 @@
+name="ivanti epmm unauthenticated api access (cve-2023-35078/35082)" rule="action = 'get' && directory contains 'mifs/aad/api/v2/authorized/users','mifs/asfv3/api/v2'" alert=eoc order=1 type=application

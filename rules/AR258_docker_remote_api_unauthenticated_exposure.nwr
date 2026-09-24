@@ -1,0 +1,1 @@
+name="docker remote api unauthenticated exposure" rule="directory contains 'images/json'" alert=eoc order=1 type=application

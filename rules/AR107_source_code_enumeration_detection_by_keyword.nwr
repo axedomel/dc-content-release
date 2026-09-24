@@ -1,0 +1,1 @@
+name="source code enumeration detection by keyword" rule="directory contains '.git/'" alert=boc order=1 type=application

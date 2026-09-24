@@ -1,0 +1,1 @@
+name="rclone activity via proxy" rule="client begins 'rclone/v' || user.agent begins 'rclone/v'" alert=boc order=1 type=application

@@ -1,0 +1,1 @@
+name="arweave decentralized storage c2 resolution" rule="(alias.host contains 'arweave.net' || alias.host ends 'g8way.io') || (domain contains 'arweave.net' || domain ends 'g8way.io') || (domain.dst contains 'arweave.net' || domain.dst ends 'g8way.io') || (url contains 'arweave.net' || url ends 'g8way.io')" alert=boc order=1 type=application

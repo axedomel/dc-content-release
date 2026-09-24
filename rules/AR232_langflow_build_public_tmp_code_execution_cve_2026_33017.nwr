@@ -1,0 +1,1 @@
+name="langflow build_public_tmp code execution (cve-2026-33017)" rule="action = 'post' && directory contains 'api/v1/build_public_tmp' && directory ends '/flow'" alert=boc order=1 type=application

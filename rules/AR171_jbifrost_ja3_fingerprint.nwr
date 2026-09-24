@@ -1,0 +1,1 @@
+name="jbifrost ja3 fingerprint" rule="direction = 'outbound' && ja3 = '51a7ad14509fd614c7bb3a50c4982b8c'" alert=ioc order=1 type=application

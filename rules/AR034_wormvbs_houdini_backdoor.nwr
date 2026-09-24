@@ -1,0 +1,1 @@
+name="wormvbs houdini backdoor" rule="direction = 'outbound' && action = 'post' && directory contains 'is-cmd-shell','is-enum-driver','is-enum-process','is-enum-fa' && (client contains '<|>' || user.agent contains '<|>')" alert=ioc order=1 type=application

@@ -1,0 +1,1 @@
+name="vmware workspace one freemarker execute() ssti" rule="action = 'get' && directory contains 'catalog-portal/ui/oauth/verify' && query contains 'freemarker.template.utility.execute'" alert=boc order=1 type=application

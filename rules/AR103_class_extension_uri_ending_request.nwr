@@ -1,0 +1,1 @@
+name=".class extension uri ending request" rule="extension = 'class'" alert=boc order=1 type=application

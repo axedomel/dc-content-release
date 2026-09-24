@@ -1,0 +1,1 @@
+name="dns protocol on non-standard port" rule="service = 53 && ((tcp.dstport exists && tcp.dstport != 53) || (udp.dstport exists && udp.dstport != 53)) && streams = 2" alert=boc order=1 type=application

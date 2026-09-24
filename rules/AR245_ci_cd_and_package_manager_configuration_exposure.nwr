@@ -1,0 +1,1 @@
+name="ci/cd and package-manager configuration exposure" rule="action = 'get' && (filename = '.travis.yml','.drone.yml','Rexfile','nuget.config','NuGet.Config','settings.xml' || directory ends '.nuget/nuget.config','.m2/settings.xml')" alert=eoc order=1 type=application

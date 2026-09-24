@@ -1,0 +1,1 @@
+name="potential sap netviewer webshell command execution" rule="directory contains '/irj/' && extension = 'jsp' && (query begins 'cmd=','command=','exec_cmd=','exec=' || query contains '/dev/tcp','/etc/passwd','%2fdev%2ftcp','%2fetc%2fpasswd','=uname','=whoami','ifconfig','ping','pwd' || (query contains 'echo' && query contains 'base64'))" alert=ioc order=1 type=application

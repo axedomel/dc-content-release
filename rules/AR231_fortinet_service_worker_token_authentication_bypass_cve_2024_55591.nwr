@@ -1,0 +1,1 @@
+name="fortinet service-worker token authentication bypass (cve-2024-55591)" rule="directory contains 'service-worker.js' && query contains 'local_access_token='" alert=boc order=1 type=application

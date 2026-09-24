@@ -1,0 +1,1 @@
+name="dns query to njalla-hosted infrastructure (default reverse-hostname pattern)" rule="alias.host ends '.host.njalla.net' || domain ends '.host.njalla.net' || domain.dst ends '.host.njalla.net' || url ends '.host.njalla.net'" alert=boc order=1 type=application

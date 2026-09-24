@@ -1,0 +1,1 @@
+name="adobe coldfusion ckeditor unauthenticated file read" rule="action = 'post' && directory contains 'cf_scripts/scripts/ajax/ckeditor'" alert=boc order=1 type=application

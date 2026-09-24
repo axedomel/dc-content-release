@@ -1,0 +1,1 @@
+name="ivanti connect secure vulnerable bookmark endpoint probe" rule="action = 'get' && directory contains 'api/v1/configuration/users/user-roles/user-role/rest-userrole1/web/web-bookmarks/bookmark'" alert=eoc order=1 type=application

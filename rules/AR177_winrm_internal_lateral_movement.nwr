@@ -1,0 +1,1 @@
+name="winrm internal lateral movement" rule="tcp.dstport = 5985,5986 && direction = 'lateral'" alert=boc order=1 type=application

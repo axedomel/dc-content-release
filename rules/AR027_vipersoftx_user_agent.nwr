@@ -1,0 +1,1 @@
+name="vipersoftx user agent" rule="service = 80,443 && direction = 'outbound' && (client begins 'viperSoftx_' || user.agent begins 'viperSoftx_')" alert=boc order=1 type=application

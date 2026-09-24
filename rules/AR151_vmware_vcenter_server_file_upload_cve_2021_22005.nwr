@@ -1,0 +1,1 @@
+name="vmware vcenter server file upload cve-2021-22005" rule="action = 'POST' && directory contains '/analytics/telemetry/ph/api/hyper/send'" alert=boc order=1 type=application

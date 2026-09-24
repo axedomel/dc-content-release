@@ -1,0 +1,1 @@
+name="adobe coldfusion administrative path access" rule="directory contains 'cfide/adminapi','cfide/administrator','cfide/componentutils','cfide/main','cfide/restplay','cfide/servermanager','cfide/wizards','restplay'" alert=eoc order=1 type=application

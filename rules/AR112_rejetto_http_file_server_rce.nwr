@@ -1,0 +1,1 @@
+name="rejetto http file server rce" rule="query contains '%00{.' && query contains 'save|','powershell','cmd.exe','cmd /c','cmd /r','cmd /k','cscript','wscript','python','C:\\\\Users\\\\Public\\\\','%comspec%'" alert=ioc order=1 type=application

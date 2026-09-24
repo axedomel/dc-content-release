@@ -1,0 +1,1 @@
+name="sensitive configuration backup file exposure" rule="action = 'get' && (filename ends '.php-backup','.properties.bak','.bak','.old','.orig','.swp','.save' && filename contains 'config','wp-config','web.config','settings')" alert=eoc order=1 type=application

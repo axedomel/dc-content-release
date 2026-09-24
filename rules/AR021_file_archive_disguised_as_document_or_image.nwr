@@ -1,0 +1,1 @@
+name="Archive Content Presented as a Document or Image" rule="filetype = 'zip','gzip compressed','cab' && extension = 'doc','pdf','jpg','jpeg','png','xls','ppt'" alert=boc order=1 type=application

@@ -1,0 +1,1 @@
+name="potential peach sandstorm apt c2 communication activity" rule="action = 'GET' && directory = '/api/Core/Command' && filename = 'Init','Restart'" alert=boc order=1 type=application

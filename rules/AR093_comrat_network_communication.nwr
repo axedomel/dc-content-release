@@ -1,0 +1,1 @@
+name="comrat network communication" rule="directory contains '/index/' && filename = 'index.php' && query begins 'h='" alert=ioc order=1 type=application

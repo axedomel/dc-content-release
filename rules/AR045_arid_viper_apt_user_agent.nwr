@@ -1,0 +1,1 @@
+name="arid viper apt user agent" rule="service = 80,443 && direction = 'outbound' && (client = 'aimxxhwpcc' || user.agent = 'aimxxhwpcc')" alert=boc order=1 type=application

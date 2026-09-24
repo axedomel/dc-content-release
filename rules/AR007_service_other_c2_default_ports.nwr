@@ -1,0 +1,1 @@
+name="Service OTHER to Common Reverse-Shell and C2 Default Ports" rule="service = 0 && direction = 'outbound' && tcp.flags.desc = 'syn' && tcp.flags.desc = 'ack' && tcp.dstport = 4444,1337,31337,8888,9001" alert=boc order=1 type=application

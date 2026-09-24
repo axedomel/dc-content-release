@@ -1,0 +1,1 @@
+name="Binary Indicator: Length-Prefixed Custom Protocol" rule="service = 0 && direction = 'outbound' && tcp.flags.desc = 'syn' && tcp.flags.desc = 'ack' && analysis.session = 'binary indicator'" alert=boc order=1 type=application

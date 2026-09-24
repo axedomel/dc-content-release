@@ -1,0 +1,1 @@
+name="web application debug/diagnostics interface exposure" rule="action = 'get' && (directory contains '_profiler/', 'elmah.axd', 'glimpse.axd', '__clockwork/app' || filename = 'elmah')" alert=eoc order=1 type=application

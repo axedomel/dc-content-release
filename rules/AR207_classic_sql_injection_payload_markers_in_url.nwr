@@ -1,0 +1,1 @@
+name="classic sql injection payload markers in url" rule="query contains 'union select','union+select','information_schema.tables','waitfor delay','xp_cmdshell','sleep(','or 1=1--','or%201=1--',';drop table',';--','extractvalue(','updatexml(','concat_ws(','and+extractvalue','and+updatexml'" alert=boc order=1 type=application

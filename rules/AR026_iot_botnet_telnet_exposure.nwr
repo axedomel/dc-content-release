@@ -1,0 +1,1 @@
+name="iot botnet telnet exposure" rule="tcp.dstport = 23,2323 && direction = 'inbound' && service != 23 && tcp.flags.desc != 'rst' && analysis.session != 'session size 0-5k'" alert=ioc order=1 type=application

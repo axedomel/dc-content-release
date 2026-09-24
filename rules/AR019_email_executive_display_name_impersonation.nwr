@@ -1,0 +1,1 @@
+name="Executive Display-Name Impersonation from an External Address" rule="direction = 'inbound' && fullname.src contains 'CEO','CFO','Chief Executive','Chief Financial','President' && ~(email.src ends '@yourcompany.com')" alert=boc order=1 type=application

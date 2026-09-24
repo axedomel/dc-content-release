@@ -1,0 +1,1 @@
+name="veeam backup & replication unauthenticated serverinfo exposure (cve-2024-40711)" rule="directory contains 'api/v1/serverinfo'" alert=eoc order=1 type=application

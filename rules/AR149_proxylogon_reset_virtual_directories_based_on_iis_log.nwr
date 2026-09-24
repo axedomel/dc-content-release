@@ -1,0 +1,1 @@
+name="proxylogon reset virtual directories based on iis log" rule="action='POST' && directory contains 'DDIService.svc' && filename = 'SetObject' && query contains 'schema=Reset' && query contains 'VirtualDirectory'" alert=ioc order=1 type=application

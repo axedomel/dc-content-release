@@ -1,0 +1,1 @@
+name="tanstack npm supply chain c2" rule="alias.host = 'git-tanstack.com','filev2.getsession.org' || domain = 'git-tanstack.com','filev2.getsession.org' || domain.dst = 'git-tanstack.com','filev2.getsession.org' || url = 'git-tanstack.com','filev2.getsession.org'" alert=ioc order=1 type=application

@@ -1,0 +1,1 @@
+name="punkeypos static ua" rule="direction = 'outbound' && (client = 'Mozilla Firefox/4.0' || user.agent = 'Mozilla Firefox/4.0')" alert=ioc order=1 type=application

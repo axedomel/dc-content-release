@@ -1,0 +1,1 @@
+name="Anomalously Small Executable Content (Packed Stub or Dropper)" rule="filetype contains 'executable' && (size = 1-51200 || analysis.file = 'exe under 10k')" alert=boc order=1 type=application

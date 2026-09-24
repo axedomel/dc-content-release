@@ -1,0 +1,1 @@
+name="Unidirectional Service OTHER Sessions" rule="service = 0 && direction = 'outbound' && streams = 1" alert=boc order=1 type=application

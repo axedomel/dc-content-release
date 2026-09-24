@@ -1,0 +1,1 @@
+name="suspicious base64 encoded user-agent" rule="client begins 'Q2hyb21l','QXBwbGVXZWJLaX','RGFsdmlr','TW96aWxsY' || user.agent begins 'Q2hyb21l','QXBwbGVXZWJLaX','RGFsdmlr','TW96aWxsY'" alert=ioc order=1 type=application

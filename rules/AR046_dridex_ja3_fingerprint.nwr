@@ -1,0 +1,1 @@
+name="dridex ja3 fingerprint" rule="direction = 'outbound' && ja3 = '67f762b0ffe3aad00dfdb0e4b1acd8b5','85bedfc1914da556aab4518390798003','51c64c77e60f3980eea90869b68c58a8','cb98a24ee4b9134448ffb5714fd870ac','b386946a5a44d1ddcc843bc75336dfce','d6f04b5a910115f4b50ecec09d40a1df'" alert=ioc order=1 type=application

@@ -1,0 +1,1 @@
+name="dns query to visual studio code tunnels domain" rule="alias.host ends '.tunnels.api.visualstudio.com' || domain ends '.tunnels.api.visualstudio.com' || domain.dst ends '.tunnels.api.visualstudio.com' || url ends '.tunnels.api.visualstudio.com'" alert=boc order=1 type=application

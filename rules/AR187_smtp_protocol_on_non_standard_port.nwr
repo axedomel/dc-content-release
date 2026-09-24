@@ -1,0 +1,1 @@
+name="smtp protocol on non-standard port" rule="service = 25 && tcp.dstport exists && tcp.dstport != 25,587,465 && streams = 2" alert=boc order=1 type=application

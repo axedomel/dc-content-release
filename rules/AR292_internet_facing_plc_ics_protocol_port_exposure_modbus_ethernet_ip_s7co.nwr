@@ -1,0 +1,1 @@
+name="internet-facing plc/ics protocol port exposure (modbus/ethernet-ip/s7comm)" rule="direction = 'inbound' && tcp.dstport = 502,44818,2222,102 && analysis.session = 'inbound traffic' && tcp.flags.desc != 'rst' && analysis.session != 'session size 0-5k'" alert=eoc order=1 type=application

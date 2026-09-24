@@ -1,0 +1,1 @@
+name="apache commons text stringsubstitutor injection (cve-2022-42889 / text4shell)" rule="query contains ':utf-8:http','${script:','${dns:','$%7Bscript%3A','$%7Bdns%3A'" alert=boc order=1 type=application

@@ -1,0 +1,1 @@
+name="rack mini profiler environment disclosure" rule="query contains 'pp=env'" alert=eoc order=1 type=application

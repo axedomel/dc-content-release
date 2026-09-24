@@ -1,0 +1,1 @@
+name="successful iis shortname fuzzing scan" rule="action = 'GET','OPTIONS' && query contains '~1' && query ends 'a.aspx'" alert=boc order=1 type=application

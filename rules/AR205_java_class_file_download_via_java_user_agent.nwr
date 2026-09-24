@@ -1,0 +1,1 @@
+name="java .class file download via java user-agent" rule="action = 'get' && filename ends '.class' && (client contains 'java' || user.agent contains 'java')" alert=boc order=1 type=application

@@ -1,0 +1,1 @@
+name="oysterloader (broomstick/cleanup) fixed /api/v2/init + /api/v2/facade c2 registration path" rule="direction = 'outbound' && service = 80,443 && directory contains '/api/v2/init','/api/v2/facade'" alert=boc order=1 type=application

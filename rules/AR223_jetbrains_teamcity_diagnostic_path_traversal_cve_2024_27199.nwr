@@ -1,0 +1,1 @@
+name="jetbrains teamcity diagnostic path traversal (cve-2024-27199)" rule="directory contains 'res/../admin/diagnostic.jsp','well-known/acme-challenge/../../admin/diagnostic.jsp','update/../admin/diagnostic.jsp'" alert=boc order=1 type=application

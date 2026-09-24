@@ -1,0 +1,1 @@
+name="tomcat malicious session file upload attempt" rule="action = 'put' && directory ends '.session'" alert=boc order=1 type=application

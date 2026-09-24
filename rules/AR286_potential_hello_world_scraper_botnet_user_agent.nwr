@@ -1,0 +1,1 @@
+name="potential hello-world scraper botnet user-agent" rule="direction = 'inbound' && (client = 'Hello-World/1.0' || user.agent = 'Hello-World/1.0')" alert=boc order=1 type=application

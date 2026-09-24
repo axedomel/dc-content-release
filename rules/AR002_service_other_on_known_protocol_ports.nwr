@@ -1,0 +1,1 @@
+name="Service OTHER on Ports Owned by Known Protocols" rule="service = 0 && direction = 'outbound' && tcp.flags.desc = 'syn' && tcp.flags.desc = 'ack' && tcp.dstport = 80,443,53,22,25" alert=boc order=1 type=application

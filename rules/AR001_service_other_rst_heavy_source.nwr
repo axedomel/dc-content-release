@@ -1,0 +1,1 @@
+name="RST-Heavy Source (Scan/Failed-Exploit Pattern)" rule="service = 0 && tcp.flags.desc = 'rst' && (direction = 'outbound' || direction = 'lateral')" alert=boc order=1 type=application

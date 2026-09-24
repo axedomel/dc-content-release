@@ -1,0 +1,1 @@
+name="executable from webdav" rule="extension = 'exe' && ((client contains 'webdav' || directory contains 'webdav') || (user.agent contains 'webdav' || directory contains 'webdav'))" alert=boc order=1 type=application

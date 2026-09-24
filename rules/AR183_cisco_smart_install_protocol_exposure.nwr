@@ -1,0 +1,1 @@
+name="cisco smart install protocol exposure" rule="tcp.dstport = 4786" alert=eoc order=1 type=application

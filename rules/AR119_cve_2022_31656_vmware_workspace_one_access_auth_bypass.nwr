@@ -1,0 +1,1 @@
+name="cve-2022-31656 vmware workspace one access auth bypass" rule="directory contains '/SAAS/t/_/;/'" alert=ioc order=1 type=application

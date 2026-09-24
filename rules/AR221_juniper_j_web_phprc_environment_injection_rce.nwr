@@ -1,0 +1,1 @@
+name="juniper j-web phprc environment injection rce" rule="directory contains 'webauth_operation.php' && query contains 'phprc='" alert=boc order=1 type=application

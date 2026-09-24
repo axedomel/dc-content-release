@@ -1,0 +1,1 @@
+name="AD Enumeration Pipes Accessed at Volume: BloodHound-Style Recon" rule="service = 139 && directory contains 'ipc$' && filename = 'samr','lsarpc','srvsvc'" alert=boc order=1 type=application

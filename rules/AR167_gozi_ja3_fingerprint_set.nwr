@@ -1,0 +1,1 @@
+name="gozi ja3 fingerprint set" rule="direction = 'outbound' && ja3 = 'c201b92f8b483fa388be174d6689f534','57f3642b4e37e28f5cbe3020c9331b4c'" alert=ioc order=1 type=application

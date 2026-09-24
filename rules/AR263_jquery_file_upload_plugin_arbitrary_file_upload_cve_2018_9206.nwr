@@ -1,0 +1,1 @@
+name="jquery file upload plugin arbitrary file upload (cve-2018-9206)" rule="directory contains 'jquery-file-upload/server/php'" alert=eoc order=1 type=application

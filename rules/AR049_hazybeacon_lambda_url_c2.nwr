@@ -1,0 +1,1 @@
+name="hazybeacon lambda url c2" rule="alias.host contains 'lambda-url.' || domain contains 'lambda-url.' || domain.dst contains 'lambda-url.' || url contains 'lambda-url.'" alert=boc order=1 type=application

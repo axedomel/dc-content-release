@@ -1,0 +1,1 @@
+name="vnc connection to the internet" rule="service = 5900 && direction = 'outbound' && tcp.flags.desc != 'rst' && analysis.session != 'session size 0-5k','session size 5-10k'" alert=boc order=1 type=application

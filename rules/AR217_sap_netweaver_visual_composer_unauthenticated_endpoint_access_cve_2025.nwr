@@ -1,0 +1,1 @@
+name="sap netweaver visual composer unauthenticated endpoint access (cve-2025-31324)" rule="directory contains 'ctc/ctcwebservice/ctcwebservicebean','ctcwebservice/ctcwebservicebean','visualcomposer/services/designtimeservice' && action = 'head', 'post'" alert=boc order=1 type=application

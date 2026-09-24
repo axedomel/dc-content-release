@@ -1,0 +1,1 @@
+name="Direct-to-IP HTTP Requests" rule="direction = 'outbound' && service = 80 && analysis.service = 'http direct to ip request'" alert=boc order=1 type=application

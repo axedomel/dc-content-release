@@ -1,0 +1,1 @@
+name="raw paste service access" rule="alias.host = 'paste.ee','pastebin.com','hastebin.com','ghostbin.co','pastetext.net','pastebin.pl' && directory contains 'raw','/r/'" alert=boc order=1 type=application

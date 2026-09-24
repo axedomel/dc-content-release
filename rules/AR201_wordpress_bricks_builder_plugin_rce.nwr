@@ -1,0 +1,1 @@
+name="wordpress bricks builder plugin rce" rule="action = 'post' && directory contains 'wp-json/bricks/v1/render_element'" alert=boc order=1 type=application

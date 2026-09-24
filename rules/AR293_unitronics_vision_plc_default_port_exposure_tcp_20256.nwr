@@ -1,0 +1,1 @@
+name="unitronics vision plc default-port exposure (tcp/20256)" rule="direction = 'inbound' && tcp.dstport = 20256 && analysis.session = 'inbound traffic' && tcp.flags.desc != 'rst' && analysis.session != 'session size 0-5k'" alert=eoc order=1 type=application

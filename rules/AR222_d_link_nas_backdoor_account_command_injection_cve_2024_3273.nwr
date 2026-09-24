@@ -1,0 +1,1 @@
+name="d-link nas backdoor account command injection (cve-2024-3273)" rule="directory contains 'cgi-bin/nas_sharing.cgi' && query contains 'user=mydlinkbrionyg' && query contains 'passwd=ywjjmtizndvjyme'" alert=boc order=1 type=application

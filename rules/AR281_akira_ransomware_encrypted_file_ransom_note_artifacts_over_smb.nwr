@@ -1,0 +1,1 @@
+name="akira ransomware encrypted-file/ransom-note artifacts over smb" rule="service = 139,445 && (extension = 'akira','powerranges','akiranew' || filename = 'akira_readme.txt','akiranew.txt')" alert=boc order=1 type=application

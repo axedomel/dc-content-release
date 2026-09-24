@@ -1,0 +1,1 @@
+name="dns query to ufile.io" rule="alias.host contains 'ufile.io' || domain contains 'ufile.io' || domain.dst contains 'ufile.io' || url contains 'ufile.io'" alert=boc order=1 type=application

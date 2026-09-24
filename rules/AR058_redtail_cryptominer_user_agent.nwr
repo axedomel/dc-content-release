@@ -1,0 +1,1 @@
+name="redtail cryptominer user agent" rule="client = 'libredtail-http' || user.agent = 'libredtail-http'" alert=boc order=1 type=application

@@ -1,0 +1,1 @@
+name="bitsadmin to uncommon ip server address" rule="analysis.service = 'http direct to ip request' && (client begins 'Microsoft BITS' || user.agent begins 'Microsoft BITS')" alert=boc order=1 type=application

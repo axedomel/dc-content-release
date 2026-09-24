@@ -1,0 +1,1 @@
+name="ibm langflow auto_login token abuse (cve-2026-9198)" rule="directory contains 'api/v1/auto_login'" alert=eoc order=1 type=application

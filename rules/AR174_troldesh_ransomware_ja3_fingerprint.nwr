@@ -1,0 +1,1 @@
+name="troldesh ransomware ja3 fingerprint" rule="direction = 'outbound' && ja3 = '1be3ecebe5aa9d3654e6e703d81f6928'" alert=ioc order=1 type=application

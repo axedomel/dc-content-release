@@ -1,0 +1,1 @@
+name="asyncrat ja3 fingerprint" rule="direction = 'outbound' && ja3 = 'fc54e0d16d9764783542f0146a98b300'" alert=ioc order=1 type=application

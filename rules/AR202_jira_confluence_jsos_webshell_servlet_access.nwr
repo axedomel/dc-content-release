@@ -1,0 +1,1 @@
+name="jira/confluence jsos webshell servlet access" rule="directory contains 'plugins/servlet/com.jsos.shell'" alert=boc order=1 type=application

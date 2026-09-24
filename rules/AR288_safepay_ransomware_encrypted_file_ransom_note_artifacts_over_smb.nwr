@@ -1,0 +1,1 @@
+name="safepay ransomware encrypted-file/ransom-note artifacts over smb" rule="service = 139,445 && (extension = 'safepay' || filename = 'readme_safepay.txt')" alert=boc order=1 type=application

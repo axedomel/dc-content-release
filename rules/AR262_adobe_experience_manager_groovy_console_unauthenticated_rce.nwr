@@ -1,0 +1,1 @@
+name="adobe experience manager groovy console unauthenticated rce" rule="directory contains 'groovyconsole' || directory ends 'etc/groovyconsole.html'" alert=eoc order=1 type=application

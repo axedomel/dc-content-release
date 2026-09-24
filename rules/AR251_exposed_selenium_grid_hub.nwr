@@ -1,0 +1,1 @@
+name="exposed selenium grid hub" rule="action = 'get' && directory ends 'wd/hub/status'" alert=eoc order=1 type=application

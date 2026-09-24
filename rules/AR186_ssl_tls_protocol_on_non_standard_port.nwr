@@ -1,0 +1,1 @@
+name="ssl/tls protocol on non-standard port" rule="service = 443 && tcp.dstport exists && tcp.dstport != 443,465,993,995,8443 && streams = 2" alert=boc order=1 type=application

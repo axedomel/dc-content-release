@@ -1,0 +1,1 @@
+name="adwind ja3 fingerprint set" rule="direction = 'outbound' && ja3 = 'd2935c58fe676744fecc8614ee5356c7','decfb48a53789ebe081b88aabb58ee34'" alert=ioc order=1 type=application

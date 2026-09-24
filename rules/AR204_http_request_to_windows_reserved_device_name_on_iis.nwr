@@ -1,0 +1,1 @@
+name="http request to windows reserved device name on iis" rule="directory ends 'aux','com1','com2','com3','com4','com5','com6','com7','con','nul','prn'" alert=boc order=1 type=application

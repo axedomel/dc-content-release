@@ -1,0 +1,1 @@
+name="rpc (135) inbound from the internet" rule="service = 135 && direction = 'inbound' && analysis.session = 'inbound traffic' && tcp.flags.desc != 'rst' && analysis.session != 'session size 0-5k','session size 5-10k'" alert=boc order=1 type=application

@@ -1,0 +1,1 @@
+name="kubernetes api server unauthenticated pods access" rule="directory ends 'api/v1/pods'" alert=eoc order=1 type=application

@@ -1,0 +1,1 @@
+name="freepbx ssh filestore driver command injection (cve-2025-64328)" rule="directory contains 'admin/ajax.php' && query contains 'module=filestore' && query contains 'command=testconnection' && query contains 'driver=ssh'" alert=boc order=1 type=application

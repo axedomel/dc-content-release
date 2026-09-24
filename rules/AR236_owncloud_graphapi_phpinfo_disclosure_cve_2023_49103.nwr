@@ -1,0 +1,1 @@
+name="owncloud graphapi phpinfo disclosure (cve-2023-49103)" rule="directory contains 'apps/graphapi/vendor/microsoft/microsoft-graph/tests/getphpinfo.php'" alert=eoc order=1 type=application

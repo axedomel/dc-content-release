@@ -1,0 +1,1 @@
+name="generic reflected xss payload in url parameter" rule="query contains '<script>alert','<svg onload=','<svg/onload=','onerror=alert','<img src=x onerror','javascript:alert','%22%3e%3cscript%3e','%3cscript%3ealert'" alert=boc order=1 type=application

@@ -1,0 +1,1 @@
+name="vmware freemarker server-side template injection (generic)" rule="action = 'get' && query contains 'deviceudid=' && query contains 'freemarker.template.utility.objectconstructor','java.lang.processbuilder'" alert=boc order=1 type=application

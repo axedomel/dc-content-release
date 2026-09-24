@@ -1,0 +1,1 @@
+name="Payload-less BEC Lure to a Finance or Executive Mailbox" rule="direction = 'inbound' && subject contains 'wire transfer','urgent payment','change of bank details','gift card' && attachment !exists" alert=boc order=1 type=application

@@ -1,0 +1,1 @@
+name="Renamed File on Copy/Move Operation" rule="~(filename.src contains '.exe','.scr','.js','.vbs','.bat','.cmd','.hta','.ps1','.jar') && filename.dst ends '.exe','.scr','.js','.vbs','.bat','.cmd','.hta','.ps1','.jar'" alert=boc order=1 type=application

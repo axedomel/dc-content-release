@@ -1,0 +1,1 @@
+name="aem additional sensitive jcr/admin endpoint exposure" rule="action = 'get' && directory contains 'crx/explorer/nodetypes','etc/replication/agents.author/publish/jcr:content.json','libs/granite/security/content/useradmin.html','etc/acs-commons','libs/granite/offloading/content/view.html' || directory ends 'jcr:content.json'" alert=eoc order=1 type=application

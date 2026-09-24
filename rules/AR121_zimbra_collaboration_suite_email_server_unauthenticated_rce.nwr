@@ -1,0 +1,1 @@
+name="zimbra collaboration suite email server unauthenticated rce" rule="action = 'POST' && filename = 'mboximport' && query contains 'account-name' && query contains 'ow' && query contains 'no-switch' && query contains 'append'" alert=boc order=1 type=application

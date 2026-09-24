@@ -1,0 +1,1 @@
+name="llm model download large" rule="(threat.category = 'llm-provider','llm-enterprise') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && analysis.session = 'high transmitted outbound' && analysis.session = 'ratio high transmitted'" alert=boc order=1 type=application

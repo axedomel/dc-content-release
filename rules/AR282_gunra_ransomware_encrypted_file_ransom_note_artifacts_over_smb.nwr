@@ -1,0 +1,1 @@
+name="gunra ransomware encrypted-file/ransom-note artifacts over smb" rule="service = 139,445 && (extension = 'encrt','gnra' || filename = 'r3adm3.txt')" alert=boc order=1 type=application

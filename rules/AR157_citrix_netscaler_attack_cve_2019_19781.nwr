@@ -1,0 +1,1 @@
+name="citrix netscaler attack cve-2019-19781" rule="directory contains '/../vpns/' || (directory contains '/vpns/cfg/' && filename = 'smb.conf') || (directory contains '/vpns/portal/scripts/' && extension = 'pl')" alert=ioc order=1 type=application

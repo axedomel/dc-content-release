@@ -1,0 +1,1 @@
+name="User Added to a Domain Group Remotely" rule="service = 139 && boc = 'add user to domain group'" alert=ioc order=1 type=application

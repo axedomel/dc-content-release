@@ -1,0 +1,1 @@
+name="Filename Padded With Extra Spaces" rule="filename contains ' ' || attachment contains ' '" alert=boc order=1 type=application

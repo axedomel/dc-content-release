@@ -1,0 +1,1 @@
+name="crypto miner user agent" rule="client begins 'XMRig ','ccminer' || user.agent begins 'XMRig ','ccminer'" alert=ioc order=1 type=application

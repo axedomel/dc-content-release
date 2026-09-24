@@ -1,0 +1,1 @@
+name="devil bait potential c2 communication traffic" rule="action = 'GET' && filename = 'cross.php' && query contains 'op=' && query contains 'dt=' && query contains 'uid='" alert=boc order=1 type=application

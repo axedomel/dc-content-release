@@ -1,0 +1,1 @@
+name="cisco ios xe wsma endpoint auth-bypass path (cve-2023-20198 companion vector)" rule="direction = 'inbound' && action = 'post' && directory contains 'webui_wsma_http','webui_wsma_https','%2577eb%2575i_%2577sma_http','%2577eb%2575i_%2577sma_https'" alert=boc order=1 type=application

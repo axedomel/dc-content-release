@@ -1,0 +1,1 @@
+name="bitbucket admin path encoded-space bypass" rule="directory contains 'admin%20/db'" alert=boc order=1 type=application

@@ -1,0 +1,1 @@
+name="motive esim/eim secure connect panel accessed" rule="action = 'get' && directory contains 'eimconfiguration','eid-management','eid-management-new','bulk-profile-operation'" alert=eoc order=1 type=application

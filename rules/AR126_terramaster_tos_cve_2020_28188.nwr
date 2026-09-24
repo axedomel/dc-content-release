@@ -1,0 +1,1 @@
+name="terramaster tos cve-2020-28188" rule="action = 'GET' && directory contains '/include' && filename = 'makecvs.php' && query contains 'Event=' && query contains 'curl','wget','.py','.sh','chmod','_GET'" alert=boc order=1 type=application

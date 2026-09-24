@@ -1,0 +1,1 @@
+name="llm plaintext http" rule="(threat.category = 'llm-provider','llm-enterprise','llm-coding') && tcp.dstport = 80" alert=eoc order=1 type=application

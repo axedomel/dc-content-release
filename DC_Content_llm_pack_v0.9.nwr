@@ -1,0 +1,31 @@
+name="llm c2 channel" rule="(threat.category = 'llm-provider','llm-enterprise') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && analysis.session = 'long connection' && analysis.session = 'session size 0-5k'" alert=boc order=1 type=application
+
+name="llm c2 beacon pattern" rule="(threat.category = 'llm-provider','llm-enterprise') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && analysis.session = 'potential beacon' && analysis.session = 'session size 0-5k'" alert=boc order=1 type=application
+
+name="llm browser access" rule="(threat.category = 'llm-provider','llm-enterprise','llm-coding') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && client contains 'Mozilla/'" alert=eoc order=1 type=application
+
+name="llm api non browser" rule="(threat.category = 'llm-provider','llm-enterprise','llm-coding') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && client exists && NOT client contains 'Mozilla/'" alert=boc order=1 type=application
+
+name="llm plaintext http" rule="(threat.category = 'llm-provider','llm-enterprise','llm-coding') && tcp.dstport = 80" alert=eoc order=1 type=application
+
+name="llm server outbound" rule="(threat.category = 'llm-provider','llm-enterprise') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && direction = 'lateral'" alert=boc order=1 type=application
+
+name="llm api key in url" rule="(threat.category = 'llm-provider','llm-enterprise','llm-coding') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && (query contains 'api_key=' || query contains 'apikey=' || query contains 'access_token=' || query contains 'secret_key=' || query contains 'bearer=')" alert=ioc order=1 type=application
+
+name="llm file upload" rule="(threat.category = 'llm-provider','llm-enterprise','llm-coding') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && action = 'post' && (attachment exists || analysis.session = 'medium transmitted outbound')" alert=boc order=1 type=application
+
+name="llm large prompt" rule="(threat.category = 'llm-provider','llm-enterprise') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && analysis.session = 'high transmitted outbound'" alert=boc order=1 type=application
+
+name="llm model download large" rule="(threat.category = 'llm-provider','llm-enterprise') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && analysis.session = 'high transmitted outbound' && analysis.session = 'ratio high transmitted'" alert=boc order=1 type=application
+
+name="llm coding source upload" rule="threat.category = 'llm-coding' && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && action = 'post' && (analysis.session = 'medium transmitted outbound' || analysis.session = 'high transmitted outbound')" alert=boc order=1 type=application
+
+name="llm lolbas access" rule="(threat.category = 'llm-provider','llm-enterprise','llm-coding') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && (client contains 'PowerShell' || client contains 'WindowsPowerShell' || client contains 'certutil' || client contains 'bitsadmin' || client contains 'wscript' || client contains 'cscript' || client contains 'mshta' || client contains 'regsvr32' || client contains 'rundll32' || client contains 'pythonw' || client contains 'Go-http-client')" alert=ioc order=1 type=application
+
+name="local llm service lateral" rule="(tcp.dstport = 11434 || tcp.dstport = 11435 || tcp.dstport = 1234 || tcp.dstport = 1337 || tcp.dstport = 5001 || tcp.dstport = 5000) && direction = 'lateral'" alert=boc order=1 type=application
+
+name="llm no user agent" rule="(threat.category = 'llm-provider','llm-enterprise','llm-coding') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && analysis.service = 'http no user-agent'" alert=boc order=1 type=application
+
+name="local llm service exposed" rule="(tcp.dstport = 11434 || tcp.dstport = 11435 || tcp.dstport = 1234 || tcp.dstport = 1337 || tcp.dstport = 5001 || tcp.dstport = 5000) && direction = 'inbound'" alert=ioc order=1 type=application
+
+name="llm malicious service access" rule="threat.category = 'llm-malicious' && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128)" alert=ioc order=1 type=application

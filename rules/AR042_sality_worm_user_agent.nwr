@@ -1,0 +1,1 @@
+name="sality worm user agent" rule="service = 80,443 && direction = 'outbound' && ((client begins 'KUKU' || client = 'DEBUT.TMP') || (user.agent begins 'KUKU' || user.agent = 'DEBUT.TMP'))" alert=ioc order=1 type=application

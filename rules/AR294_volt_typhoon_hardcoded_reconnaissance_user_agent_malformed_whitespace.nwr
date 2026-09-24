@@ -1,0 +1,1 @@
+name="volt typhoon hardcoded reconnaissance user-agent (malformed whitespace)" rule="direction = 'inbound' && (client contains 'rv:68.0)			    Gecko/20100101' || user.agent contains 'rv:68.0)			    Gecko/20100101')" alert=boc order=1 type=application

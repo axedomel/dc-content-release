@@ -1,0 +1,1 @@
+name="ivanti connect secure saml component ssrf" rule="action = 'post' && directory contains 'dana-ws/saml20.ws','dana-ws/saml.ws','dana-ws/samlecp.ws','dana-na/auth/saml-logout.cgi'" alert=eoc order=1 type=application

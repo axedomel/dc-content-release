@@ -1,0 +1,1 @@
+name="fortinac arbitrary file write (cve-2022-39952)" rule="directory contains 'configwizard/keyupload.jsp'" alert=boc order=1 type=application

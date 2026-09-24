@@ -1,0 +1,1 @@
+name="potential java webshell upload in sap netviewer server" rule="action = 'POST' && directory contains '/irj/' && directory contains '.jsp' && extension = 'class','java','jsp'" alert=boc order=1 type=application

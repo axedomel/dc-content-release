@@ -1,0 +1,1 @@
+name="apache spark shell command injection - weblogs" rule="query contains 'doAs=`','doAs=%60'" alert=boc order=1 type=application

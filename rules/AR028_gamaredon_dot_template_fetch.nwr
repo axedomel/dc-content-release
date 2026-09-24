@@ -1,0 +1,1 @@
+name="gamaredon dot template fetch" rule="direction = 'outbound' && extension = 'dot' && (client contains 'ms-office','Microsoft Office' || user.agent contains 'ms-office','Microsoft Office')" alert=boc order=1 type=application

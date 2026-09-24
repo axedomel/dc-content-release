@@ -1,0 +1,1 @@
+name="suspicious network communication with ipfs" rule="alias.host = 'ipfs.io' && (directory contains '@' || filename contains '@' || query contains '@')" alert=boc order=1 type=application

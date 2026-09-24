@@ -1,0 +1,1 @@
+name="f5 big-ip tmui configuration auth bypass" rule="directory contains 'mgmt/tm/auth/user' && action = 'patch'" alert=boc order=1 type=application

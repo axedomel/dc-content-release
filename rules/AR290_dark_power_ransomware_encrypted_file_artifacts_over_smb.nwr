@@ -1,0 +1,1 @@
+name="dark power ransomware encrypted-file artifacts over smb" rule="service = 139,445 && extension = 'dark_power'" alert=boc order=1 type=application

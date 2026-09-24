@@ -1,0 +1,1 @@
+name="confluence ognl template injection (cve-2023-22527)" rule="action = 'post' && directory contains 'template/aui/text-inline.vm'" alert=boc order=1 type=application

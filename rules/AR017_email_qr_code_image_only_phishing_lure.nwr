@@ -1,0 +1,1 @@
+name="QR-Code / Image-Only Phishing Lure" rule="direction = 'inbound' && attachment !exists && subject contains 'scan','verify','authenticate','mfa','document ready','fax'" alert=boc order=1 type=application

@@ -1,0 +1,299 @@
+name="grafana path traversal exploitation cve-2021-43798" rule="directory contains '/../../../../../../../' && directory contains '/public/plugins/'" alert=boc order=1 type=application
+
+name="cve-2021-41773 exploitation attempt" rule="directory contains '/cgi-bin/.%2e/','/icons/.%2e/','/cgi-bin/.%%32%65/','/icons/.%%32%65/','/cgi-bin/.%%%25%33','/icons/.%%%25%33'" alert=ioc order=1 type=application
+
+name="sitecore pre-auth rce cve-2021-42237" rule="action = 'POST' && directory contains '/sitecore/shell/ClientBin/Reporting/' && filename = 'Report.ashx'" alert=boc order=1 type=application
+
+name="exchange exploitation used by hafnium" rule="action = 'POST' && directory contains '/owa/auth/Current/themes/resources/'" alert=boc order=1 type=application
+
+name="dewmode webshell access" rule="extension = 'html' && query contains 'dwn=' && query contains 'fn='" alert=ioc order=1 type=application
+
+name="citrix netscaler attack cve-2019-19781" rule="directory contains '/../vpns/' || (directory contains '/vpns/cfg/' && filename = 'smb.conf') || (directory contains '/vpns/portal/scripts/' && extension = 'pl')" alert=ioc order=1 type=application
+
+name="pulse secure attack cve-2019-11510" rule="query begins '/dana/html5acc/guacamole/'" alert=ioc order=1 type=application
+
+name="confluence exploitation cve-2019-3398" rule="action = 'POST' && filename contains 'upload.action' && query contains 'filename=../../../../'" alert=ioc order=1 type=application
+
+name="fortinet cve-2018-13379 exploitation" rule="query contains 'lang=/../../' && query contains '/dev/cmdb/sslvpn_websession'" alert=ioc order=1 type=application
+
+name="oracle weblogic exploit" rule="directory contains '/config/keystore/' && filename contains '.js'" alert=ioc order=1 type=application
+
+name="vnc connection to the internet" rule="service = 5900 && direction = 'outbound' && tcp.flags.desc != 'rst' && analysis.session != 'session size 0-5k','session size 5-10k'" alert=boc order=1 type=application
+
+name="cloud instance metadata credential path http request" rule="ip.dst = 169.254.169.254 && service = 80 && action = 'get' && directory contains 'security-credentials','service-accounts','identity/oauth2'" alert=ioc order=1 type=application
+
+name="rpc (135) inbound from the internet" rule="service = 135 && direction = 'inbound' && analysis.session = 'inbound traffic' && tcp.flags.desc != 'rst' && analysis.session != 'session size 0-5k','session size 5-10k'" alert=boc order=1 type=application
+
+name="weak or deprecated tls cipher negotiated" rule="direction = 'outbound' && service != 88 && crypto contains 'RC4','3DES','NULL','EXPORT','anon','MD5'" alert=eoc order=1 type=application
+
+name="trickbot ja3 fingerprint set" rule="direction = 'outbound' && ja3 = '1aa7bf8b97e540ca5edd75f7b8384bfa','8f52d1ce303fb4a6515836aec3cc16b1','c50f6a8b9173676b47ba6085bd0c6cee','534ce2dbc413c68e908363b5df0ae5e0','fb00055a1196aeea8d1bc609885ba953','8916410db85077a5460817142dcbc8de','e62a5f4d538cbf169c2af71bec2399b4','f735bbc6b69723b9df7b0e7ef27872af','49ed2ef3f1321e5f044f1e71b0e6fdd5'" alert=ioc order=1 type=application
+
+name="gozi ja3 fingerprint set" rule="direction = 'outbound' && ja3 = 'c201b92f8b483fa388be174d6689f534','57f3642b4e37e28f5cbe3020c9331b4c'" alert=ioc order=1 type=application
+
+name="quakbot ja3 fingerprint set" rule="direction = 'outbound' && ja3 = '3cda52da4ade09f1f781ad2e82dcfa20','7dd50e112cd23734a310b90f6f44a7cd'" alert=ioc order=1 type=application
+
+name="asyncrat ja3 fingerprint" rule="direction = 'outbound' && ja3 = 'fc54e0d16d9764783542f0146a98b300'" alert=ioc order=1 type=application
+
+name="bitrat ja3 fingerprint" rule="direction = 'outbound' && ja3 = '8515076cbbca9dce33151b798f782456'" alert=ioc order=1 type=application
+
+name="jbifrost ja3 fingerprint" rule="direction = 'outbound' && ja3 = '51a7ad14509fd614c7bb3a50c4982b8c'" alert=ioc order=1 type=application
+
+name="adwind ja3 fingerprint set" rule="direction = 'outbound' && ja3 = 'd2935c58fe676744fecc8614ee5356c7','decfb48a53789ebe081b88aabb58ee34'" alert=ioc order=1 type=application
+
+name="torrentlocker ja3 fingerprint" rule="direction = 'outbound' && ja3 = '1712287800ac91b34cadd5884ce85568'" alert=ioc order=1 type=application
+
+name="troldesh ransomware ja3 fingerprint" rule="direction = 'outbound' && ja3 = '1be3ecebe5aa9d3654e6e703d81f6928'" alert=ioc order=1 type=application
+
+name="coinminer ja3 fingerprint" rule="direction = 'outbound' && ja3 = '40adfd923eb82b89d8836ba37a19bca1'" alert=ioc order=1 type=application
+
+name="exfiltration via chat platform webhook" rule="action = 'post' && ((alias.host = 'discord.com','discordapp.com','canary.discord.com','ptb.discord.com' && directory contains 'api/webhooks') || (alias.host = 'hooks.slack.com' && directory contains 'services') || alias.host contains '.webhook.office.com')" alert=boc order=1 type=application
+
+name="winrm internal lateral movement" rule="tcp.dstport = 5985,5986 && direction = 'lateral'" alert=boc order=1 type=application
+
+name="c2 framework default user-agent string" rule="direction = 'outbound' && ((client = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.8827.897 Safari/537.36','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.8827.897 Safari/537.36','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36','Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; Win64; x64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)','Mozilla/6.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0','nimplant','NimPlant C2 Client','tunnelto-client','Yakit/1.0.0','linux:feeds:v2 (by /u/pico-sh)','C2FunctionAgent','dvadcat','sliverua','ligoloua','Mozilla/5.0 (compatible; ngrok)' || client begins 'remoteit/','pivotnacci/') || (user.agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.8827.897 Safari/537.36','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.8827.897 Safari/537.36','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36','Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; Win64; x64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)','Mozilla/6.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0','nimplant','NimPlant C2 Client','tunnelto-client','Yakit/1.0.0','linux:feeds:v2 (by /u/pico-sh)','C2FunctionAgent','dvadcat','sliverua','ligoloua','Mozilla/5.0 (compatible; ngrok)' || user.agent begins 'remoteit/','pivotnacci/'))" alert=boc order=1 type=application
+
+name="rmm / remote-access tool user-agent string" rule="direction = 'outbound' && ((client = 'AnyDesk','MeshCentral' || client begins 'AnyDesk/','AnyDesk ','RemotePC ','NetSupport Manager/','NetSupport Gateway/','LogMeIn/','Lomond/' || client ends ' DesktopCentral Agent' || client contains 'splashtop') || (user.agent = 'AnyDesk','MeshCentral' || user.agent begins 'AnyDesk/','AnyDesk ','RemotePC ','NetSupport Manager/','NetSupport Gateway/','LogMeIn/','Lomond/' || user.agent ends ' DesktopCentral Agent' || user.agent contains 'splashtop'))" alert=boc order=1 type=application
+
+name="ad / cloud recon & offensive-security tool user-agent string" rule="direction = 'outbound' && ((client = 'AADInternals','OWASP Amass','Certipy','KrbRelayUp/1.0','Rubeus/1.0','ShadowSpray.Kerb/1.0','SharpBuster','dirhunt','subfinder','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Teams/1.3.00.30866 Chrome/80.0.3987.165 Electron/8.5.1 Safari/537.36','Cr3dOv3r-Framework' || client begins 'azurehound','PingCastleAutoUpdater','TruffleHog') || (user.agent = 'AADInternals','OWASP Amass','Certipy','KrbRelayUp/1.0','Rubeus/1.0','ShadowSpray.Kerb/1.0','SharpBuster','dirhunt','subfinder','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Teams/1.3.00.30866 Chrome/80.0.3987.165 Electron/8.5.1 Safari/537.36','Cr3dOv3r-Framework' || user.agent begins 'azurehound','PingCastleAutoUpdater','TruffleHog'))" alert=boc order=1 type=application
+
+name="cobalt strike default malleable-profile user-agent string" rule="direction = 'outbound' && (client = 'Microsoft Internet Explorer','Microsoft-CryptoAPI/6.1','Mozilla Firefox/4.0','Mozilla/4.0 (Windows 7 6.1) Java/1.7.0_11','Mozilla/4.0 (compatible; MSIE 6.0;Windows NT 5.1)','Mozilla/4.0 (compatible; MSIE 6.0b; Windows NT 5.0; .NET CLR 1.0.2914)','Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; SV1)','Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)','Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36','Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)','Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36','Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36','Mozilla/5.0 (Windows NT 6.1) AppleWebKit/587.38','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36','Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0','Mozilla/5.0 (Windows NT 6.1; rv:24.0) Gecko/20100101 Firefox/24.0','Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36','Mozilla/5.0 (compatible, MSIE 11, Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko','Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET4.0E; QQBrowser/7.0.3698.400)','Shockwave Flash','Windows-Update-Agent/10.0.10011.16384 Client-Protocol/1.40' || user.agent = 'Microsoft Internet Explorer','Microsoft-CryptoAPI/6.1','Mozilla Firefox/4.0','Mozilla/4.0 (Windows 7 6.1) Java/1.7.0_11','Mozilla/4.0 (compatible; MSIE 6.0;Windows NT 5.1)','Mozilla/4.0 (compatible; MSIE 6.0b; Windows NT 5.0; .NET CLR 1.0.2914)','Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; SV1)','Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)','Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36','Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)','Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36','Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36','Mozilla/5.0 (Windows NT 6.1) AppleWebKit/587.38','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36','Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0','Mozilla/5.0 (Windows NT 6.1; rv:24.0) Gecko/20100101 Firefox/24.0','Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36','Mozilla/5.0 (compatible, MSIE 11, Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko','Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET4.0E; QQBrowser/7.0.3698.400)','Shockwave Flash','Windows-Update-Agent/10.0.10011.16384 Client-Protocol/1.40')" alert=boc order=1 type=application
+
+name="info-stealer / rat distinctive user-agent string" rule="direction = 'outbound' && ((client = 'JustKidding','NIKMOK','BunnyLoader','BunnyLoader_Dropper','BunnyRequester','BunnyShell','BunnyStealer','BunnyTasks','HeartBeat_Sender','Project1sqlite','Project1','AE632AE3-FACB-4C1B-8906-FB65A13B01B4','OnionWClient','OnionWClient / 1.0','GameInfo','medusa-stealer','TeslaBrowser/5.5','Skype/8.69.0.77 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36','PresidentPutin','condi-bbos' || client begins 'arkei/','SSLoad/','WSHRAT') || (user.agent = 'JustKidding','NIKMOK','BunnyLoader','BunnyLoader_Dropper','BunnyRequester','BunnyShell','BunnyStealer','BunnyTasks','HeartBeat_Sender','Project1sqlite','Project1','AE632AE3-FACB-4C1B-8906-FB65A13B01B4','OnionWClient','OnionWClient / 1.0','GameInfo','medusa-stealer','TeslaBrowser/5.5','Skype/8.69.0.77 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36','PresidentPutin','condi-bbos' || user.agent begins 'arkei/','SSLoad/','WSHRAT'))" alert=boc order=1 type=application
+
+name="cisco smart install protocol exposure" rule="tcp.dstport = 4786" alert=eoc order=1 type=application
+
+name="dns protocol on non-standard port" rule="service = 53 && ((tcp.dstport exists && tcp.dstport != 53) || (udp.dstport exists && udp.dstport != 53)) && streams = 2" alert=boc order=1 type=application
+
+name="http protocol on non-standard port" rule="service = 80 && tcp.dstport exists && tcp.dstport != 80,8000,8080 && streams = 2" alert=boc order=1 type=application
+
+name="ssl/tls protocol on non-standard port" rule="service = 443 && tcp.dstport exists && tcp.dstport != 443,465,993,995,8443 && streams = 2" alert=boc order=1 type=application
+
+name="smtp protocol on non-standard port" rule="service = 25 && tcp.dstport exists && tcp.dstport != 25,587,465 && streams = 2" alert=boc order=1 type=application
+
+name="large icmp traffic to public destination" rule="ip.proto = 1 && direction = 'outbound' && (payload > 1000 || filename exists || filetype exists)" alert=boc order=1 type=application
+
+name="citrix sharefile documentum upload exploitation (cve-2023-24489)" rule="action = 'post' && directory contains 'documentum/upload.aspx' && (query contains 'parentid=' && query contains 'filename=' && query contains 'uploadid=') && query contains 'unzip=','raw='" alert=boc order=1 type=application
+
+name="confluence setup-status privilege escalation (cve-2023-22515)" rule="action = 'get' && directory contains 'server-info.action' && query contains 'setupcomplete=false','setupcomplete=0'" alert=boc order=1 type=application
+
+name="confluence ognl template injection (cve-2023-22527)" rule="action = 'post' && directory contains 'template/aui/text-inline.vm'" alert=boc order=1 type=application
+
+name="fortinac arbitrary file write (cve-2022-39952)" rule="directory contains 'configwizard/keyupload.jsp'" alert=boc order=1 type=application
+
+name="ivanti epmm unauthenticated api access (cve-2023-35078/35082)" rule="action = 'get' && directory contains 'mifs/aad/api/v2/authorized/users','mifs/asfv3/api/v2'" alert=eoc order=1 type=application
+
+name="ivanti connect secure path-traversal auth bypass" rule="(directory contains 'totp/user-backup-code' && directory contains 'system/maintenance/archiving/cloud-server-test-connection','license/keys-status','system/system-information') || (action = 'post' && directory contains 'api/v1/cav/client/' && filename = 'categories')" alert=boc order=1 type=application
+
+name="ivanti connect secure saml component ssrf" rule="action = 'post' && directory contains 'dana-ws/saml20.ws','dana-ws/saml.ws','dana-ws/samlecp.ws','dana-na/auth/saml-logout.cgi'" alert=eoc order=1 type=application
+
+name="ivanti connect secure vulnerable bookmark endpoint probe" rule="action = 'get' && directory contains 'api/v1/configuration/users/user-roles/user-role/rest-userrole1/web/web-bookmarks/bookmark'" alert=eoc order=1 type=application
+
+name="cisco ios xe web ui implant check (cve-2023-20198)" rule="action = 'post' && directory contains 'webui/logoutconfirm.html' && query contains 'logon_hash='" alert=boc order=1 type=application
+
+name="jboss management console reconnaissance" rule="action = 'get', 'head' && directory contains 'web-console/serverinfo.jsp','web-console','jmx-console','invoker'" alert=boc order=1 type=application
+
+name="jboss jmx-console htmladaptor exploitation attempt" rule="directory contains 'jmx-console/htmladaptor' && query contains 'action=invokeopbyname' && query contains 'jboss.admin'" alert=boc order=1 type=application
+
+name="papercut ng remote setup/printer-management access" rule="directory contains 'app' && query contains 'service=direct/1/printerdetails/printeroptionstab.tab','service=direct/1/printerlist/selectprinter','service=page/printerlist','service=page/setupcompleted'" alert=boc order=1 type=application
+
+name="wordpress bricks builder plugin rce" rule="action = 'post' && directory contains 'wp-json/bricks/v1/render_element'" alert=boc order=1 type=application
+
+name="jira/confluence jsos webshell servlet access" rule="directory contains 'plugins/servlet/com.jsos.shell'" alert=boc order=1 type=application
+
+name="spring cloud function functionrouter exploitation (cve-2022-22963)" rule="action = 'post' && directory contains 'functionrouter'" alert=boc order=1 type=application
+
+name="http request to windows reserved device name on iis" rule="directory ends 'aux','com1','com2','com3','com4','com5','com6','com7','con','nul','prn'" alert=boc order=1 type=application
+
+name="java .class file download via java user-agent" rule="action = 'get' && filename ends '.class' && (client contains 'java' || user.agent contains 'java')" alert=boc order=1 type=application
+
+name="apache commons text stringsubstitutor injection (cve-2022-42889 / text4shell)" rule="query contains ':utf-8:http','${script:','${dns:','$%7Bscript%3A','$%7Bdns%3A'" alert=boc order=1 type=application
+
+name="classic sql injection payload markers in url" rule="query contains 'union select','union+select','information_schema.tables','waitfor delay','xp_cmdshell','sleep(','or 1=1--','or%201=1--',';drop table',';--','extractvalue(','updatexml(','concat_ws(','and+extractvalue','and+updatexml'" alert=boc order=1 type=application
+
+name="adobe coldfusion administrative path access" rule="directory contains 'cfide/adminapi','cfide/administrator','cfide/componentutils','cfide/main','cfide/restplay','cfide/servermanager','cfide/wizards','restplay'" alert=eoc order=1 type=application
+
+name="adobe coldfusion ckeditor unauthenticated file read" rule="action = 'post' && directory contains 'cf_scripts/scripts/ajax/ckeditor'" alert=boc order=1 type=application
+
+name="citrix adc/gateway citrixbleed 2 exploitation (cve-2025-5777)" rule="action = 'post' && directory contains 'p/u/doauthentication.do'" alert=boc order=1 type=application
+
+name="f5 big-ip tmui configuration auth bypass" rule="directory contains 'mgmt/tm/auth/user' && action = 'patch'" alert=boc order=1 type=application
+
+name="fortinet appliance admin config api auth bypass" rule="directory contains 'api/v2/cmdb/system/admin' && action = 'get', 'put'" alert=boc order=1 type=application
+
+name="sharepoint toolpane deserialization exploitation (cve-2025-53771)" rule="action = 'post' && directory contains '_layouts/15/toolpane.aspx' && query contains 'displaymode=edit'" alert=boc order=1 type=application
+
+name="tomcat partial-put session deserialization attempt" rule="action = 'get' && cookie begins 'jsessionid=.'" alert=boc order=1 type=application
+
+name="tomcat malicious session file upload attempt" rule="action = 'put' && directory ends '.session'" alert=boc order=1 type=application
+
+name="spring4shell public poc webshell filename request" rule="action = 'get' && filename = 'tomcatwar.jsp','poc.jsp','shell.jsp'" alert=boc order=1 type=application
+
+name="sap netweaver visual composer unauthenticated endpoint access (cve-2025-31324)" rule="directory contains 'ctc/ctcwebservice/ctcwebservicebean','ctcwebservice/ctcwebservicebean','visualcomposer/services/designtimeservice' && action = 'head', 'post'" alert=boc order=1 type=application
+
+name="vmware aria operations resttosaasservlet exploitation" rule="action = 'post' && directory contains 'saas./resttosaasservlet'" alert=boc order=1 type=application
+
+name="vmware freemarker server-side template injection (generic)" rule="action = 'get' && query contains 'deviceudid=' && query contains 'freemarker.template.utility.objectconstructor','java.lang.processbuilder'" alert=boc order=1 type=application
+
+name="vmware workspace one freemarker execute() ssti" rule="action = 'get' && directory contains 'catalog-portal/ui/oauth/verify' && query contains 'freemarker.template.utility.execute'" alert=boc order=1 type=application
+
+name="juniper j-web phprc environment injection rce" rule="directory contains 'webauth_operation.php' && query contains 'phprc='" alert=boc order=1 type=application
+
+name="d-link nas backdoor account command injection (cve-2024-3273)" rule="directory contains 'cgi-bin/nas_sharing.cgi' && query contains 'user=mydlinkbrionyg' && query contains 'passwd=ywjjmtizndvjyme'" alert=boc order=1 type=application
+
+name="jetbrains teamcity diagnostic path traversal (cve-2024-27199)" rule="directory contains 'res/../admin/diagnostic.jsp','well-known/acme-challenge/../../admin/diagnostic.jsp','update/../admin/diagnostic.jsp'" alert=boc order=1 type=application
+
+name="jetbrains teamcity hax jsp authentication bypass (cve-2024-27198)" rule="directory contains 'hax' && query contains 'jsp=/app/rest/server;.jsp'" alert=boc order=1 type=application
+
+name="php-cgi argument injection (cve-2024-4577)" rule="action = 'post' && query contains 'cgi.force_redirect%3d0' && query contains 'auto_prepend_file%3dphp://input'" alert=boc order=1 type=application
+
+name="sonicwall pre-authentication arbitrary file read (cve-2024-38475)" rule="directory contains 'tmp/temp.db%3f','mnt/ram/var/log/httpd.log%3f'" alert=boc order=1 type=application
+
+name="xwiki solrsearch groovy rce (cve-2025-24893)" rule="directory contains 'bin/get/main/solrsearch' && query contains 'groovy' && query contains '.execute()'" alert=boc order=1 type=application
+
+name="rejetto http file server macro template injection (cve-2024-23692)" rule="query contains 'search=%25xxx%25url%25'" alert=boc order=1 type=application
+
+name="ivanti cloud services appliance path traversal (cve-2024-8963)" rule="directory contains 'client/index.php%3f.php/gsb/users.php'" alert=boc order=1 type=application
+
+name="pan-os management interface path confusion auth bypass (cve-2025-0108)" rule="directory contains 'unauth/%252e%252e/php/ztp_gate.php'" alert=boc order=1 type=application
+
+name="fortinet service-worker token authentication bypass (cve-2024-55591)" rule="directory contains 'service-worker.js' && query contains 'local_access_token='" alert=boc order=1 type=application
+
+name="langflow build_public_tmp code execution (cve-2026-33017)" rule="action = 'post' && directory contains 'api/v1/build_public_tmp' && directory ends '/flow'" alert=boc order=1 type=application
+
+name="palo alto expedition admin account takeover (cve-2024-5910)" rule="directory contains 'os/startup/restore/restoreadmin.php'" alert=boc order=1 type=application
+
+name="veeam backup & replication unauthenticated serverinfo exposure (cve-2024-40711)" rule="directory contains 'api/v1/serverinfo'" alert=eoc order=1 type=application
+
+name="freepbx ssh filestore driver command injection (cve-2025-64328)" rule="directory contains 'admin/ajax.php' && query contains 'module=filestore' && query contains 'command=testconnection' && query contains 'driver=ssh'" alert=boc order=1 type=application
+
+name="owncloud graphapi phpinfo disclosure (cve-2023-49103)" rule="directory contains 'apps/graphapi/vendor/microsoft/microsoft-graph/tests/getphpinfo.php'" alert=eoc order=1 type=application
+
+name="simplehelp allversions privilege escalation disclosure (cve-2024-57726)" rule="directory contains 'allversions'" alert=eoc order=1 type=application
+
+name="ibm langflow auto_login token abuse (cve-2026-9198)" rule="directory contains 'api/v1/auto_login'" alert=eoc order=1 type=application
+
+name="gladinet centrestack/triofox hardcoded ticket exploitation (cve-2025-14611)" rule="directory contains 'storage/filesvr.dn' && query contains 'vghpi7etozudizddprsubl3mtz2','vghpi7etozudizddprsubehrthntizyg2qqrcddetcitxhiuesqu1pppd0bq03d6bdri8usk8qtlek1u8i2khiltdy5632hogcvv6bq1zsqkpxpmisglb'" alert=boc order=1 type=application
+
+name="zimbra collaboration servlet_path local file inclusion (cve-2025-68645)" rule="query contains 'javax.servlet.include.servlet_path=/web-inf/'" alert=boc order=1 type=application
+
+name="goanywhere mft unlicensed-servlet deserialization auth bypass (cve-2025-10035)" rule="directory contains 'license/unlicensed.xhtml' && query contains 'garequestaction=activate'" alert=boc order=1 type=application
+
+name="version-control repository metadata exposure" rule="action = 'get' && (directory ends '.git/config','.gitmodules','.gitignore' || directory contains '.git/head')" alert=eoc order=1 type=application
+
+name="environment (.env) file exposure" rule="action = 'get' && filename = '.env'" alert=eoc order=1 type=application
+
+name="system/cloud credential dotfile exposure" rule="action = 'get' && (filename = '.htpasswd','.netrc','_netrc','.pgpass','.my.cnf','.s3cfg','.esmtprc','.msmtprc','.ftpconfig','.credentials','.dockercfg' || directory ends '.aws/credentials','.docker/config.json','.gem/credentials','.gem/credentials.yaml')" alert=eoc order=1 type=application
+
+name="ci/cd and package-manager configuration exposure" rule="action = 'get' && (filename = '.travis.yml','.drone.yml','Rexfile','nuget.config','NuGet.Config','settings.xml' || directory ends '.nuget/nuget.config','.m2/settings.xml')" alert=eoc order=1 type=application
+
+name="ide/editor remote-sync credential exposure" rule="action = 'get' && (filename = 'sftp.json','deployment-config.json','sftp-config.json','.remote-sync.json','ftpsync.settings' || directory ends '.vscode/sftp.json','.config/sftp.json')" alert=eoc order=1 type=application
+
+name="web framework database/secrets configuration exposure" rule="action = 'get' && (filename = 'secrets.yml','configuration.yml','user_secrets.yml','database.yml','parameters.yml','databases.yml','local.xml','settings.py','manage.py' || directory ends 'config/secrets.yml','config/database.yml','app/config/parameters.yml','app/etc/local.xml')" alert=eoc order=1 type=application
+
+name="oauth/auth json configuration exposure" rule="action = 'get' && (filename = 'auth.json','.auth.json' || directory ends 'config/auth.json','configs/auth.json','configuration/auth.json','api/auth.json','app/auth.json')" alert=eoc order=1 type=application
+
+name="web application debug/diagnostics interface exposure" rule="action = 'get' && (directory contains '_profiler/', 'elmah.axd', 'glimpse.axd', '__clockwork/app' || filename = 'elmah')" alert=eoc order=1 type=application
+
+name="sensitive configuration backup file exposure" rule="action = 'get' && (filename ends '.php-backup','.properties.bak','.bak','.old','.orig','.swp','.save' && filename contains 'config','wp-config','web.config','settings')" alert=eoc order=1 type=application
+
+name="exposed selenium grid hub" rule="action = 'get' && directory ends 'wd/hub/status'" alert=eoc order=1 type=application
+
+name="oracle e-business suite credentials page exposure" rule="directory contains 'oa_html/jtfwrepo.xml'" alert=eoc order=1 type=application
+
+name="spring boot actuator sensitive endpoint exposure" rule="action = 'get' && (directory contains 'actuator/env','actuator/heapdump','actuator/jolokia','actuator/threaddump','actuator/logfile','actuator/httptrace','actuator/httpexchanges','actuator/configprops','actuator/beans','actuator/mappings','actuator/loggers','actuator/dump','actuator/trace' || directory ends '/env','/heapdump','/jolokia' && directory contains 'actuator')" alert=eoc order=1 type=application
+
+name="application installer/setup wizard left exposed" rule="action = 'get' && (directory contains 'wp-admin/install.php','admin/install.php','zp-core/setup/index.php','html/setup.html' || directory ends 'install/2')" alert=eoc order=1 type=application
+
+name="odoo unprotected database manager" rule="directory contains 'web/database/manager'" alert=eoc order=1 type=application
+
+name="nacos authentication bypass user enumeration" rule="directory contains 'nacos/v1/auth/users' && query contains 'pagesize=10' && query contains 'accesstoken='" alert=eoc order=1 type=application
+
+name="bitbucket admin path encoded-space bypass" rule="directory contains 'admin%20/db'" alert=boc order=1 type=application
+
+name="docker remote api unauthenticated exposure" rule="directory contains 'images/json'" alert=eoc order=1 type=application
+
+name="jupyter notebook/lab unauthenticated access" rule="action = 'get' && (directory contains 'lab/api/settings' || directory ends 'ipython/tree')" alert=eoc order=1 type=application
+
+name="hadoop yarn resourcemanager unauthenticated rce" rule="directory contains 'ws/v1/cluster/apps/new-application'" alert=eoc order=1 type=application
+
+name="kubernetes api server unauthenticated pods access" rule="directory ends 'api/v1/pods'" alert=eoc order=1 type=application
+
+name="adobe experience manager groovy console unauthenticated rce" rule="directory contains 'groovyconsole' || directory ends 'etc/groovyconsole.html'" alert=eoc order=1 type=application
+
+name="jquery file upload plugin arbitrary file upload (cve-2018-9206)" rule="directory contains 'jquery-file-upload/server/php'" alert=eoc order=1 type=application
+
+name="rack mini profiler environment disclosure" rule="query contains 'pp=env'" alert=eoc order=1 type=application
+
+name="unauthenticated data-store/infrastructure management api exposure" rule="action = 'get' && (directory contains 'api/v2/tenants','v2/auth/roles','v2/keys/','hazelcast/rest/cluster','service/rest/v1/repositories','ui/jobs','kafka/clusters','ui/clusters/kafka-ui','collections?tenant','v1/health/service/consul','mongo-express','db/admin/system.users','solr/admin/','conf','api/v1/applications','environment/','api/v1/cluster/summary',':4040/jobs','containers/','graph_view.php','druid/index.html','v2/_catalog','_status/nodes','_status/statements','api/components/search_projects','slurm/','pdb/dashboard/index.html','pdb/query/v4/facts','applications.pinpoint','toolkit/','icinga2','recent_scans/','api/v1/namespaces/default/workflows' || directory ends '_config' || query contains 'query=show%20databases')" alert=eoc order=1 type=application
+
+name="unauthenticated monitoring/observability dashboard exposure" rule="action = 'get' && (directory contains 'api/search?type=dash-db','api/dashboards/home','graph','classic/graph','service-discovery','app/kibana','haproxy-status','haproxy?stats','config.json','..%3b/monitoring','backend/admin/users?username=anonymous','overview.html','mem_tracker','api/v1/data?chart=system.cpu','sensorlist.htm','opennms' || directory ends 'monitoring','/munin/','/overview','/dashboard' || query contains 'api/v1/status/config')" alert=eoc order=1 type=application
+
+name="unauthenticated ml/data-pipeline platform exposure" rule="action = 'get' && (directory contains 'ajax-api/2.0/preview/mlflow','pipeline/apis/v1beta1/runs','nifi-api/access/config','api/security/ticket','api/v1/workflows/argo','model/info','api/tags','data/plugins_listing' || directory ends '/admin/','/flows' && directory contains 'node-red','airflow')" alert=eoc order=1 type=application
+
+name="additional credential/secret file disclosure" rule="action = 'get' && (directory contains 'storage/oauth-private.key','storage/oauth-public.key','storage/framework/sessions','storage/sessions','node_modules/mqtt/test/helpers','_vti_pvt/service.pwd','sites/default/settings.php','wp-content/wflogs/config.php','wp-content/wflogs/config-synced.php','wp-content/wflogs/rules.php','wp-content/debug.log','data/db.sqlite','.vs/slnx.sqlite','000~root~000/etc/passwd','wwtest/phpinfo.php','password-page/ovf/account-credentials-ovf' || filename = 'slnx.sqlite' || (directory contains 'api/get-users' && query contains 'pagesize='))" alert=eoc order=1 type=application
+
+name="open admin/user registration left enabled" rule="action = 'get' && (directory ends 'user/sign_up','sign-up','register' || directory contains 'identity/account/register','account/register')" alert=eoc order=1 type=application
+
+name="embedded/iot/ot device administrative interface exposure" rule="action = 'get' && (directory contains 'cgi-bin/webproc','request_para.cgi','onvif/media.cgi','ssi/auth/ip_snmp.htm','hp/device/webaccess','portal0000.htm','cgi-bin/getsrvinfo.exe','wifi_base.shtml','escl/scannercapabilities','client/index.html','tcpconfig.html','config/pw_left_bar.html','adminweb/','espeasy' || filename = 'actpt_5g.data')" alert=eoc order=1 type=application
+
+name="cloud/devops backend configuration exposure" rule="action = 'get' && (directory contains 'go/add-on/business-continuity/api/cruise_config','go/admin/pipelines/create','artifactory/ui/repodata','project/default','api/platform/profile','pacts','ui/relationships','templates/config/profmanage.php','api/global/configs/checklist','sms_dp_smspkg$/datalib','cobbler/','cblr/','explore/repos','accounts/?q=' || directory ends 'ui/jobs')" alert=eoc order=1 type=application
+
+name="aem additional sensitive jcr/admin endpoint exposure" rule="action = 'get' && directory contains 'crx/explorer/nodetypes','etc/replication/agents.author/publish/jcr:content.json','libs/granite/security/content/useradmin.html','etc/acs-commons','libs/granite/offloading/content/view.html' || directory ends 'jcr:content.json'" alert=eoc order=1 type=application
+
+name="miscellaneous named-application sensitive endpoint exposure" rule="action = 'get' && (directory contains 'asf/terminal','nova/dashboards/main','nova/resources','ckfinder/ckfinder.html','sqlitemanager/','ui/dashboard','jackett/ui/dashboard','glpi/files/','users/public','api/auth/settings','transmission/web/','lightstreamer/dashboard/','api/v1/messages','sap/public/info','irj/go/km/navigation','iojs/%2e/web-inf/web.xml','searchreplacedb2.php','info.cgi','cgi-bin/info.cgi','cgi-sys/info.cgi','api/sitecore/sitecore.mvc.devicesimulator' || directory ends 'wd/hub' || (directory contains 'index.php' && query contains 'module=api' && query contains 'method=visitssummary.get'))" alert=eoc order=1 type=application
+
+name="generic reflected xss payload in url parameter" rule="query contains '<script>alert','<svg onload=','<svg/onload=','onerror=alert','<img src=x onerror','javascript:alert','%22%3e%3cscript%3e','%3cscript%3ealert'" alert=boc order=1 type=application
+
+name="named-product backdoor / unauthenticated rce endpoint access" rule="action = 'get' && (directory contains '.antproxy.php','jexws/jexws.jsp','jexws4/jexws4.jsp','.clean.sh','_users/_all_docs','lucee/admin/web.cfm','lucee/admin/server.cfm','irj/helper.jsp','irj/cache.jsp','jenkins/script' || directory ends '/script/' || (directory contains 'v1/cs/configs' && query contains 'export=true'))" alert=boc order=1 type=application
+
+name="arweave decentralized storage c2 resolution" rule="(alias.host contains 'arweave.net' || alias.host ends 'g8way.io') || (domain contains 'arweave.net' || domain ends 'g8way.io') || (domain.dst contains 'arweave.net' || domain.dst ends 'g8way.io') || (url contains 'arweave.net' || url ends 'g8way.io')" alert=boc order=1 type=application
+
+name="serverless baas/analytics platform abused for c2" rule="alias.host ends '.supabase.co','.clickhouse.cloud','.neon.tech' || domain ends '.supabase.co','.clickhouse.cloud','.neon.tech' || domain.dst ends '.supabase.co','.clickhouse.cloud','.neon.tech' || url ends '.supabase.co','.clickhouse.cloud','.neon.tech'" alert=boc order=1 type=application
+
+name="prometheus-style metrics exporter exposed to inbound traffic" rule="direction = 'inbound' && action = 'get' && filename = 'metrics' && tcp.dstport = 9100,9101,9103,9104,9115,9121,9187,9216,9256" alert=eoc order=1 type=application
+
+name="motive esim/eim secure connect panel accessed" rule="action = 'get' && directory contains 'eimconfiguration','eid-management','eid-management-new','bulk-profile-operation'" alert=eoc order=1 type=application
+
+name="wildcard-dns-to-ip service abuse (sslip.io / nip.io)" rule="(alias.host = 'nip.io','sslip.io' || alias.host ends '.nip.io','.sslip.io') || (domain = 'nip.io','sslip.io' || domain ends '.nip.io','.sslip.io') || (domain.dst = 'nip.io','sslip.io' || domain.dst ends '.nip.io','.sslip.io') || (url = 'nip.io','sslip.io' || url ends '.nip.io','.sslip.io')" alert=boc order=1 type=application
+
+name="akira ransomware encrypted-file/ransom-note artifacts over smb" rule="service = 139,445 && (extension = 'akira','powerranges','akiranew' || filename = 'akira_readme.txt','akiranew.txt')" alert=boc order=1 type=application
+
+name="gunra ransomware encrypted-file/ransom-note artifacts over smb" rule="service = 139,445 && (extension = 'encrt','gnra' || filename = 'r3adm3.txt')" alert=boc order=1 type=application
+
+name="icedid/latrodectus-lineage malware tls ja3+ja3s pair" rule="ja3='a0e9f5d64349fb13191bc781f81f42e1' && ja3s='ec74a5c51106f0419184d0dd08fb05bc'" alert=boc order=1 type=application
+
+name="additional anonymous file-sharing/decentralized-storage service domains" rule="direction = 'outbound' && (alias.host contains 'temp.sh','dropmefiles.com','s3.filebase.com' || domain contains 'temp.sh','dropmefiles.com','s3.filebase.com' || domain.dst contains 'temp.sh','dropmefiles.com','s3.filebase.com' || url contains 'temp.sh','dropmefiles.com','s3.filebase.com')" alert=boc order=1 type=application
+
+name="dns query to njalla-hosted infrastructure (default reverse-hostname pattern)" rule="alias.host ends '.host.njalla.net' || domain ends '.host.njalla.net' || domain.dst ends '.host.njalla.net' || url ends '.host.njalla.net'" alert=boc order=1 type=application
+
+name="potential hello-world scraper botnet user-agent" rule="direction = 'inbound' && (client = 'Hello-World/1.0' || user.agent = 'Hello-World/1.0')" alert=boc order=1 type=application
+
+name="blacksuit ransomware encrypted-file/ransom-note artifacts over smb" rule="service = 139,445 && (extension = 'blacksuit' || filename = 'README.BlackSuit.txt','readme.blacksuit.txt')" alert=boc order=1 type=application
+
+name="safepay ransomware encrypted-file/ransom-note artifacts over smb" rule="service = 139,445 && (extension = 'safepay' || filename = 'readme_safepay.txt')" alert=boc order=1 type=application
+
+name="rhysida ransomware encrypted-file artifacts over smb" rule="service = 139,445 && extension = 'rhysida'" alert=boc order=1 type=application
+
+name="dark power ransomware encrypted-file artifacts over smb" rule="service = 139,445 && extension = 'dark_power'" alert=boc order=1 type=application
+
+name="snmp internet-exposed management interface (inbound)" rule="service = 161 && direction = 'inbound' && analysis.session = 'inbound traffic' && tcp.flags.desc != 'rst' && analysis.session != 'session size 0-5k'" alert=eoc order=1 type=application
+
+name="internet-facing plc/ics protocol port exposure (modbus/ethernet-ip/s7comm)" rule="direction = 'inbound' && tcp.dstport = 502,44818,2222,102 && analysis.session = 'inbound traffic' && tcp.flags.desc != 'rst' && analysis.session != 'session size 0-5k'" alert=eoc order=1 type=application
+
+name="unitronics vision plc default-port exposure (tcp/20256)" rule="direction = 'inbound' && tcp.dstport = 20256 && analysis.session = 'inbound traffic' && tcp.flags.desc != 'rst' && analysis.session != 'session size 0-5k'" alert=eoc order=1 type=application
+
+name="volt typhoon hardcoded reconnaissance user-agent (malformed whitespace)" rule="direction = 'inbound' && (client contains 'rv:68.0)			    Gecko/20100101' || user.agent contains 'rv:68.0)			    Gecko/20100101')" alert=boc order=1 type=application
+
+name="cisco ios xe wsma endpoint auth-bypass path (cve-2023-20198 companion vector)" rule="direction = 'inbound' && action = 'post' && directory contains 'webui_wsma_http','webui_wsma_https','%2577eb%2575i_%2577sma_http','%2577eb%2575i_%2577sma_https'" alert=boc order=1 type=application
+
+name="cisco ios privileged exec-via-http legacy endpoint abuse" rule="direction = 'inbound' && directory contains 'level/15/exec'" alert=eoc order=1 type=application
+
+name="oob webhook-capture service abuse for c2/exfiltration" rule="direction = 'outbound' && (alias.host contains '.webhook.site','.webhookapp.com','.requestcatcher.com' || domain contains '.webhook.site','.webhookapp.com','.requestcatcher.com' || domain.dst contains '.webhook.site','.webhookapp.com','.requestcatcher.com' || url contains '.webhook.site','.webhookapp.com','.requestcatcher.com')" alert=boc order=1 type=application
+
+name="executable payload delivery via discord cdn attachments" rule="action = 'get' && alias.host = 'cdn.discordapp.com' && directory contains 'attachments' && extension = 'exe','dll','scr','ps1','vbs','bat','jar','msi','hta'" alert=boc order=1 type=application
+
+name="patchcord (suspected apt36) beacon/1.0.0 c2 check-in" rule="direction = 'outbound' && directory contains 'api.jsp' && (client contains 'Beacon/1.0.0' || user.agent contains 'Beacon/1.0.0')" alert=boc order=1 type=application
+
+name="oysterloader (broomstick/cleanup) fixed /api/v2/init + /api/v2/facade c2 registration path" rule="direction = 'outbound' && service = 80,443 && directory contains '/api/v2/init','/api/v2/facade'" alert=boc order=1 type=application
+
+name="speakingstone zbt router supply-chain backdoor phone-home" rule="direction = 'outbound' && alias.host = 'ac-link.com','www.findmyipaddr.com' && udp.dstport = 10000" alert=boc order=1 type=application

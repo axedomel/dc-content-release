@@ -1,0 +1,1 @@
+name="axios npm compromise c2" rule="alias.host = 'sfrclak.com','calltan.com','callnrwise.com' || domain = 'sfrclak.com','calltan.com','callnrwise.com' || domain.dst = 'sfrclak.com','calltan.com','callnrwise.com' || url = 'sfrclak.com','calltan.com','callnrwise.com'" alert=ioc order=1 type=application

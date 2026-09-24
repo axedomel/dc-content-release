@@ -1,0 +1,1 @@
+name="atlassian bitbucket command injection via archive api" rule="directory contains '/rest/api/latest/projects/' && query contains 'prefix=' && query contains '%00--exec'" alert=ioc order=1 type=application

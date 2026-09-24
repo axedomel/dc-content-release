@@ -1,0 +1,1 @@
+name="cisco ios xe web ui implant check (cve-2023-20198)" rule="action = 'post' && directory contains 'webui/logoutconfirm.html' && query contains 'logon_hash='" alert=boc order=1 type=application

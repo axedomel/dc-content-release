@@ -1,0 +1,1 @@
+name="fortinet appliance admin config api auth bypass" rule="directory contains 'api/v2/cmdb/system/admin' && action = 'get', 'put'" alert=boc order=1 type=application

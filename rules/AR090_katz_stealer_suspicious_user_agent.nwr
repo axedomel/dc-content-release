@@ -1,0 +1,1 @@
+name="katz stealer suspicious user-agent" rule="client contains 'katz-ontop' || user.agent contains 'katz-ontop'" alert=ioc order=1 type=application

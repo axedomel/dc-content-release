@@ -1,0 +1,1 @@
+name="papercut ng remote setup/printer-management access" rule="directory contains 'app' && query contains 'service=direct/1/printerdetails/printeroptionstab.tab','service=direct/1/printerlist/selectprinter','service=page/printerlist','service=page/setupcompleted'" alert=boc order=1 type=application

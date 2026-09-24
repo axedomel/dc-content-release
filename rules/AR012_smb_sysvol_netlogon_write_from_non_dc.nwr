@@ -1,0 +1,1 @@
+name="SYSVOL/NETLOGON Write from a Non-DC Source" rule="service = 139 && directory contains 'sysvol','netlogon' && action = 'write','create'" alert=ioc order=1 type=application

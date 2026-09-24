@@ -1,0 +1,1 @@
+name="pua - advanced ip/port scanner update check" rule="filename = 'checkupdate.php' && query contains 'lng=' && query contains 'ver=' && query contains 'beta=' && query contains 'type=' && query contains 'rmode=' && query contains 'product='" alert=boc order=1 type=application

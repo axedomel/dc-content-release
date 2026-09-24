@@ -1,0 +1,1 @@
+name="dns query to devtunnels domain" rule="alias.host ends '.devtunnels.ms' || domain ends '.devtunnels.ms' || domain.dst ends '.devtunnels.ms' || url ends '.devtunnels.ms'" alert=boc order=1 type=application

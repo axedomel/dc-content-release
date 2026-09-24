@@ -1,0 +1,1 @@
+name="remcos rat ja3 fingerprint" rule="direction = 'outbound' && ja3 = 'a85be79f7b569f1df5e6087b69deb493'" alert=ioc order=1 type=application

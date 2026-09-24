@@ -1,0 +1,1 @@
+name="weak or deprecated tls cipher negotiated" rule="direction = 'outbound' && service != 88 && crypto contains 'RC4','3DES','NULL','EXPORT','anon','MD5'" alert=eoc order=1 type=application

@@ -1,0 +1,1 @@
+name="Binary Handshake: Non-Text Session Initialization" rule="service = 0 && direction = 'outbound' && tcp.flags.desc = 'syn' && tcp.flags.desc = 'ack' && analysis.session = 'binary handshake'" alert=boc order=1 type=application

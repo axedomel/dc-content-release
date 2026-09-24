@@ -1,0 +1,1 @@
+name="patchcord (suspected apt36) beacon/1.0.0 c2 check-in" rule="direction = 'outbound' && directory contains 'api.jsp' && (client contains 'Beacon/1.0.0' || user.agent contains 'Beacon/1.0.0')" alert=boc order=1 type=application

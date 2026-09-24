@@ -1,0 +1,1 @@
+name="serverless baas/analytics platform abused for c2" rule="alias.host ends '.supabase.co','.clickhouse.cloud','.neon.tech' || domain ends '.supabase.co','.clickhouse.cloud','.neon.tech' || domain.dst ends '.supabase.co','.clickhouse.cloud','.neon.tech' || url ends '.supabase.co','.clickhouse.cloud','.neon.tech'" alert=boc order=1 type=application

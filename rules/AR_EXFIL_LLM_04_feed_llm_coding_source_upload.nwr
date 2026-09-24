@@ -1,0 +1,1 @@
+name="llm coding source upload" rule="threat.category = 'llm-coding' && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && action = 'post' && (analysis.session = 'medium transmitted outbound' || analysis.session = 'high transmitted outbound')" alert=boc order=1 type=application

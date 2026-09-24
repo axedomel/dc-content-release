@@ -1,0 +1,1 @@
+name="prometheus-style metrics exporter exposed to inbound traffic" rule="direction = 'inbound' && action = 'get' && filename = 'metrics' && tcp.dstport = 9100,9101,9103,9104,9115,9121,9187,9216,9256" alert=eoc order=1 type=application

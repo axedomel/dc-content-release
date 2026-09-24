@@ -1,0 +1,1 @@
+name="torrentlocker ja3 fingerprint" rule="direction = 'outbound' && ja3 = '1712287800ac91b34cadd5884ce85568'" alert=ioc order=1 type=application

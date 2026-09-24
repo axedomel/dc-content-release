@@ -1,0 +1,1 @@
+name="environment (.env) file exposure" rule="action = 'get' && filename = '.env'" alert=eoc order=1 type=application

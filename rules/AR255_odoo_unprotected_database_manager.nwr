@@ -1,0 +1,1 @@
+name="odoo unprotected database manager" rule="directory contains 'web/database/manager'" alert=eoc order=1 type=application

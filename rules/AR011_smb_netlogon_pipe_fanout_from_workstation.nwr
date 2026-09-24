@@ -1,0 +1,1 @@
+name="Netlogon Pipe Fan-Out from a Workstation" rule="service = 139 && directory contains 'ipc$' && filename = 'netlogon' && direction = 'lateral'" alert=boc order=1 type=application

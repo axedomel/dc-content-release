@@ -1,0 +1,1 @@
+name="imddos botnet client checkin" rule="direction = 'outbound' && service = 80,443 && (client contains 'i am ddos','STORMDDOS','IAMDDOS','YTDDOS' || user.agent contains 'i am ddos','STORMDDOS','IAMDDOS','YTDDOS')" alert=boc order=1 type=application

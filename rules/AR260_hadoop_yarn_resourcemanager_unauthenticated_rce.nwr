@@ -1,0 +1,1 @@
+name="hadoop yarn resourcemanager unauthenticated rce" rule="directory contains 'ws/v1/cluster/apps/new-application'" alert=eoc order=1 type=application

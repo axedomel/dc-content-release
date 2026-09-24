@@ -1,0 +1,1 @@
+name="executable payload delivery via discord cdn attachments" rule="action = 'get' && alias.host = 'cdn.discordapp.com' && directory contains 'attachments' && extension = 'exe','dll','scr','ps1','vbs','bat','jar','msi','hta'" alert=boc order=1 type=application

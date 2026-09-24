@@ -1,0 +1,1 @@
+name="solarwinds supernova webshell access" rule="filename contains 'logoimagehandler.ashx' && query contains 'clazz'" alert=ioc order=1 type=application

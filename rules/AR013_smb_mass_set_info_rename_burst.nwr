@@ -1,0 +1,1 @@
+name="Mass SET_INFO (Rename) Burst" rule="service = 139 && action = 'set info' && direction = 'lateral'" alert=boc order=1 type=application

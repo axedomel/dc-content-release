@@ -1,0 +1,1 @@
+name="application installer/setup wizard left exposed" rule="action = 'get' && (directory contains 'wp-admin/install.php','admin/install.php','zp-core/setup/index.php','html/setup.html' || directory ends 'install/2')" alert=eoc order=1 type=application

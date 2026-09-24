@@ -1,0 +1,301 @@
+name="RST-Heavy Source (Scan/Failed-Exploit Pattern)" rule="service = 0 && tcp.flags.desc = 'rst' && (direction = 'outbound' || direction = 'lateral')" alert=boc order=1 type=application
+
+name="Service OTHER on Ports Owned by Known Protocols" rule="service = 0 && direction = 'outbound' && tcp.flags.desc = 'syn' && tcp.flags.desc = 'ack' && tcp.dstport = 80,443,53,22,25" alert=boc order=1 type=application
+
+name="Binary Indicator: Length-Prefixed Custom Protocol" rule="service = 0 && direction = 'outbound' && tcp.flags.desc = 'syn' && tcp.flags.desc = 'ack' && analysis.session = 'binary indicator'" alert=boc order=1 type=application
+
+name="Binary Handshake: Non-Text Session Initialization" rule="service = 0 && direction = 'outbound' && tcp.flags.desc = 'syn' && tcp.flags.desc = 'ack' && analysis.session = 'binary handshake'" alert=boc order=1 type=application
+
+name="Inbound Service OTHER" rule="service = 0 && direction = 'inbound' && tcp.flags.desc = 'syn' && tcp.flags.desc = 'ack'" alert=boc order=1 type=application
+
+name="Large Outbound Service OTHER Sessions" rule="service = 0 && direction = 'outbound' && tcp.flags.desc = 'syn' && tcp.flags.desc = 'ack' && size = 1000000-u" alert=boc order=1 type=application
+
+name="Service OTHER to Common Reverse-Shell and C2 Default Ports" rule="service = 0 && direction = 'outbound' && tcp.flags.desc = 'syn' && tcp.flags.desc = 'ack' && tcp.dstport = 4444,1337,31337,8888,9001" alert=boc order=1 type=application
+
+name="Lateral Service OTHER Between Internal Hosts" rule="service = 0 && direction = 'lateral' && tcp.flags.desc = 'syn' && tcp.flags.desc = 'ack'" alert=boc order=1 type=application
+
+name="Unidirectional Service OTHER Sessions" rule="service = 0 && direction = 'outbound' && streams = 1" alert=boc order=1 type=application
+
+name="AD Enumeration Pipes Accessed at Volume: BloodHound-Style Recon" rule="service = 139 && directory contains 'ipc$' && filename = 'samr','lsarpc','srvsvc'" alert=boc order=1 type=application
+
+name="Netlogon Pipe Fan-Out from a Workstation" rule="service = 139 && directory contains 'ipc$' && filename = 'netlogon' && direction = 'lateral'" alert=boc order=1 type=application
+
+name="SYSVOL/NETLOGON Write from a Non-DC Source" rule="service = 139 && directory contains 'sysvol','netlogon' && action = 'write','create'" alert=ioc order=1 type=application
+
+name="Mass SET_INFO (Rename) Burst" rule="service = 139 && action = 'set info' && direction = 'lateral'" alert=boc order=1 type=application
+
+name="User Added to a Domain Group Remotely" rule="service = 139 && boc = 'add user to domain group'" alert=ioc order=1 type=application
+
+name="RDP Sessions Using Sensitive or Privileged Account Names" rule="service = 3389 && (username begins 'admin','svc' || username contains 'adm' || username ends '$')" alert=boc order=1 type=application
+
+name="Payload-less BEC Lure to a Finance or Executive Mailbox" rule="direction = 'inbound' && subject contains 'wire transfer','urgent payment','change of bank details','gift card' && attachment !exists" alert=boc order=1 type=application
+
+name="QR-Code / Image-Only Phishing Lure" rule="direction = 'inbound' && attachment !exists && subject contains 'scan','verify','authenticate','mfa','document ready','fax'" alert=boc order=1 type=application
+
+name="Outbound Mail to Personal Webmail Domains" rule="direction = 'outbound' && email.dst ends '@gmail.com','@yahoo.com','@outlook.com','@hotmail.com','@protonmail.com','@icloud.com','@mail.ru','@qq.com'" alert=boc order=1 type=application
+
+name="Executive Display-Name Impersonation from an External Address" rule="direction = 'inbound' && fullname.src contains 'CEO','CFO','Chief Executive','Chief Financial','President' && ~(email.src ends '@yourcompany.com')" alert=boc order=1 type=application
+
+name="Filename Padded With Extra Spaces" rule="filename contains ' ' || attachment contains ' '" alert=boc order=1 type=application
+
+name="Archive Content Presented as a Document or Image" rule="filetype = 'zip','gzip compressed','cab' && extension = 'doc','pdf','jpg','jpeg','png','xls','ppt'" alert=boc order=1 type=application
+
+name="Renamed File on Copy/Move Operation" rule="~(filename.src contains '.exe','.scr','.js','.vbs','.bat','.cmd','.hta','.ps1','.jar') && filename.dst ends '.exe','.scr','.js','.vbs','.bat','.cmd','.hta','.ps1','.jar'" alert=boc order=1 type=application
+
+name="Anomalously Small Executable Content (Packed Stub or Dropper)" rule="filetype contains 'executable' && (size = 1-51200 || analysis.file = 'exe under 10k')" alert=boc order=1 type=application
+
+name="Base64 Content in a Disguised Certificate File" rule="filename ends '.cer' && ioc = 'possible base64 windows shell'" alert=ioc order=1 type=application
+
+name="Direct-to-IP HTTP Requests" rule="direction = 'outbound' && service = 80 && analysis.service = 'http direct to ip request'" alert=boc order=1 type=application
+
+name="iot botnet telnet exposure" rule="tcp.dstport = 23,2323 && direction = 'inbound' && service != 23 && tcp.flags.desc != 'rst' && analysis.session != 'session size 0-5k'" alert=ioc order=1 type=application
+
+name="vipersoftx user agent" rule="service = 80,443 && direction = 'outbound' && (client begins 'viperSoftx_' || user.agent begins 'viperSoftx_')" alert=boc order=1 type=application
+
+name="gamaredon dot template fetch" rule="direction = 'outbound' && extension = 'dot' && (client contains 'ms-office','Microsoft Office' || user.agent contains 'ms-office','Microsoft Office')" alert=boc order=1 type=application
+
+name="hangover apt user agent" rule="service = 80,443 && direction = 'outbound' && (client contains 'DSMBVCTFRE','MBESCVDFRT','TCBFRVDEMS','DEMOMAKE','vbusers','folderwin','smaal','bugmaal','FMBVDFRESCT','UPHTTP','nento' || user.agent contains 'DSMBVCTFRE','MBESCVDFRT','TCBFRVDEMS','DEMOMAKE','vbusers','folderwin','smaal','bugmaal','FMBVDFRESCT','UPHTTP','nento')" alert=boc order=1 type=application
+
+name="bittorrent p2p client detected" rule="direction = 'outbound' && service = 80,443 && (client contains 'BitComet/','BitTornado/','Transmission/','Deluge','KTorrent/3','rtorrent/','uTorrent','BTSP/','Enhanced-CTorrent','FDM 3.','Opera BitTorrent','Bittorrent' || user.agent contains 'BitComet/','BitTornado/','Transmission/','Deluge','KTorrent/3','rtorrent/','uTorrent','BTSP/','Enhanced-CTorrent','FDM 3.','Opera BitTorrent','Bittorrent')" alert=boc order=1 type=application
+
+name="loadmoney pup installer" rule="service = 80,443 && direction = 'outbound' && (client contains 'tiny-dl' || user.agent contains 'tiny-dl')" alert=ioc order=1 type=application
+
+name="imddos botnet client checkin" rule="direction = 'outbound' && service = 80,443 && (client contains 'i am ddos','STORMDDOS','IAMDDOS','YTDDOS' || user.agent contains 'i am ddos','STORMDDOS','IAMDDOS','YTDDOS')" alert=boc order=1 type=application
+
+name="volatile cedar explosive implant" rule="client = 'Mozilla/4.0 (compatible; MSIE 7.0; MSIE 6.0; Windows NT 5.1; .NET CLR 2.0.50727)' || user.agent = 'Mozilla/4.0 (compatible; MSIE 7.0; MSIE 6.0; Windows NT 5.1; .NET CLR 2.0.50727)'" alert=ioc order=1 type=application
+
+name="wormvbs houdini backdoor" rule="direction = 'outbound' && action = 'post' && directory contains 'is-cmd-shell','is-enum-driver','is-enum-process','is-enum-fa' && (client contains '<|>' || user.agent contains '<|>')" alert=ioc order=1 type=application
+
+name="soraya pos malware checkin" rule="direction = 'outbound' && ((client begins 'rome0321','rhyno321','VHIbot/1.0','xehanort321','slayer','Vulture' || client = 'SBTCM') || (user.agent begins 'rome0321','rhyno321','VHIbot/1.0','xehanort321','slayer','Vulture' || user.agent = 'SBTCM'))" alert=ioc order=1 type=application
+
+name="apt28 filen cloud c2 abuse" rule="alias.host = 'gateway.filen.io','ingest.filen.io','egest.filen.io' || domain = 'gateway.filen.io','ingest.filen.io','egest.filen.io' || domain.dst = 'gateway.filen.io','ingest.filen.io','egest.filen.io' || url = 'gateway.filen.io','ingest.filen.io','egest.filen.io'" alert=boc order=1 type=application
+
+name="scieron htclient user agent" rule="service = 80,443 && direction = 'outbound' && (client begins 'HTClient;' || user.agent begins 'HTClient;')" alert=boc order=1 type=application
+
+name="buer loader ja3" rule="ja3='6cc312d5b10bcbc97c4619603a24131b' && ja3s='f6dfdd25d1522e4e1c7cd09bd37ce619'" alert=boc order=1 type=application
+
+name="banload exampledl user agent" rule="service = 80,443 && direction = 'outbound' && (client = 'ExampleDL' || user.agent = 'ExampleDL')" alert=boc order=1 type=application
+
+name="win32 bisonal static ua" rule="direction = 'outbound' && (client = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; .NET CLR 1.1.4322)' || user.agent = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; .NET CLR 1.1.4322)')" alert=ioc order=1 type=application
+
+name="win32 svcready user agent" rule="service = 80,443 && direction = 'outbound' && (client = 'svc/1.0' || user.agent = 'svc/1.0')" alert=boc order=1 type=application
+
+name="sality worm user agent" rule="service = 80,443 && direction = 'outbound' && ((client begins 'KUKU' || client = 'DEBUT.TMP') || (user.agent begins 'KUKU' || user.agent = 'DEBUT.TMP'))" alert=ioc order=1 type=application
+
+name="punkeypos static ua" rule="direction = 'outbound' && (client = 'Mozilla Firefox/4.0' || user.agent = 'Mozilla Firefox/4.0')" alert=ioc order=1 type=application
+
+name="gcleaner pup user agent" rule="service = 80,443 && direction = 'outbound' && (client = 'TAKEMIX','TAKEMIXTWO' || user.agent = 'TAKEMIX','TAKEMIXTWO')" alert=boc order=1 type=application
+
+name="arid viper apt user agent" rule="service = 80,443 && direction = 'outbound' && (client = 'aimxxhwpcc' || user.agent = 'aimxxhwpcc')" alert=boc order=1 type=application
+
+name="dridex ja3 fingerprint" rule="direction = 'outbound' && ja3 = '67f762b0ffe3aad00dfdb0e4b1acd8b5','85bedfc1914da556aab4518390798003','51c64c77e60f3980eea90869b68c58a8','cb98a24ee4b9134448ffb5714fd870ac','b386946a5a44d1ddcc843bc75336dfce','d6f04b5a910115f4b50ecec09d40a1df'" alert=ioc order=1 type=application
+
+name="donotgroup apt user agent" rule="service = 80,443 && direction = 'outbound' && (client contains 'UserAgent:Mozilla/5.0 (Windows NT 6.1;','Chrome Edge 97.0.5','Mozilla FireFox 61.00','Mozila 53.0 edge 73.1','Mozilla 105.01.05' || user.agent contains 'UserAgent:Mozilla/5.0 (Windows NT 6.1;','Chrome Edge 97.0.5','Mozilla FireFox 61.00','Mozila 53.0 edge 73.1','Mozilla 105.01.05')" alert=boc order=1 type=application
+
+name="kimsuky apt user agent" rule="service = 80,443 && direction = 'outbound' && (client contains 'Chremo/87.0.4280.141','Chnome/97.0.4692.99' || user.agent contains 'Chremo/87.0.4280.141','Chnome/97.0.4692.99')" alert=boc order=1 type=application
+
+name="hazybeacon lambda url c2" rule="alias.host contains 'lambda-url.' || domain contains 'lambda-url.' || domain.dst contains 'lambda-url.' || url contains 'lambda-url.'" alert=boc order=1 type=application
+
+name="c2looper github beacon files" rule="alias.host = 'api.github.com','raw.githubusercontent.com' && filename = 'cmd.json','result.json','beacon.json'" alert=ioc order=1 type=application
+
+name="silkparasite apt c2 domains" rule="alias.host = 'evo.hoster-kg.com','it.hpsupporter.com','mineconom.tdtu.org','info.ktnet.org' || domain = 'evo.hoster-kg.com','it.hpsupporter.com','mineconom.tdtu.org','info.ktnet.org' || domain.dst = 'evo.hoster-kg.com','it.hpsupporter.com','mineconom.tdtu.org','info.ktnet.org' || url = 'evo.hoster-kg.com','it.hpsupporter.com','mineconom.tdtu.org','info.ktnet.org'" alert=ioc order=1 type=application
+
+name="remcos rat ja3 fingerprint" rule="direction = 'outbound' && ja3 = 'a85be79f7b569f1df5e6087b69deb493'" alert=ioc order=1 type=application
+
+name="androxgh0st interlock shared toolkit ja3" rule="direction = 'outbound' && ja3 = 'b885946e72ad51dca6c70abc2f773506'" alert=ioc order=1 type=application
+
+name="eviltokens phaas worker railway" rule="(alias.host contains '-s-account.workers.dev' || alias.host ends '.up.railway.app') || (domain contains '-s-account.workers.dev' || domain ends '.up.railway.app') || (domain.dst contains '-s-account.workers.dev' || domain.dst ends '.up.railway.app') || (url contains '-s-account.workers.dev' || url ends '.up.railway.app')" alert=boc order=1 type=application
+
+name="tanstack npm supply chain c2" rule="alias.host = 'git-tanstack.com','filev2.getsession.org' || domain = 'git-tanstack.com','filev2.getsession.org' || domain.dst = 'git-tanstack.com','filev2.getsession.org' || url = 'git-tanstack.com','filev2.getsession.org'" alert=ioc order=1 type=application
+
+name="axios npm compromise c2" rule="alias.host = 'sfrclak.com','calltan.com','callnrwise.com' || domain = 'sfrclak.com','calltan.com','callnrwise.com' || domain.dst = 'sfrclak.com','calltan.com','callnrwise.com' || url = 'sfrclak.com','calltan.com','callnrwise.com'" alert=ioc order=1 type=application
+
+name="wordpress wp2shell exploitation" rule="(client = 'wp2shell' || directory contains 'wp2shell_') || (user.agent = 'wp2shell' || directory contains 'wp2shell_')" alert=boc order=1 type=application
+
+name="redtail cryptominer user agent" rule="client = 'libredtail-http' || user.agent = 'libredtail-http'" alert=boc order=1 type=application
+
+name="rclone activity via proxy" rule="client begins 'rclone/v' || user.agent begins 'rclone/v'" alert=boc order=1 type=application
+
+name="suspicious base64 encoded user-agent" rule="client begins 'Q2hyb21l','QXBwbGVXZWJLaX','RGFsdmlr','TW96aWxsY' || user.agent begins 'Q2hyb21l','QXBwbGVXZWJLaX','RGFsdmlr','TW96aWxsY'" alert=ioc order=1 type=application
+
+name="crypto miner user agent" rule="client begins 'XMRig ','ccminer' || user.agent begins 'XMRig ','ccminer'" alert=ioc order=1 type=application
+
+name="hacktool - babyshark agent default url pattern" rule="filename = 'momyshark' && query begins 'key='" alert=ioc order=1 type=application
+
+name="suspicious external webdav execution" rule="extension = '7z','bat','dat','cmd','exe','js','lnk','ps1','rar','url','vbe','vbs','zip' && ((client begins 'Microsoft-WebDAV-MiniRedir/' && action = 'GET','PROPFIND' && direction = 'outbound','lateral') || (user.agent begins 'Microsoft-WebDAV-MiniRedir/' && action = 'GET' && direction = 'outbound'))" alert=boc order=1 type=application
+
+name="suspicious network communication with ipfs" rule="alias.host = 'ipfs.io' && (directory contains '@' || filename contains '@' || query contains '@')" alert=boc order=1 type=application
+
+name="bitsadmin to uncommon ip server address" rule="analysis.service = 'http direct to ip request' && (client begins 'Microsoft BITS' || user.agent begins 'Microsoft BITS')" alert=boc order=1 type=application
+
+name="raw paste service access" rule="alias.host = 'paste.ee','pastebin.com','hastebin.com','ghostbin.co','pastetext.net','pastebin.pl' && directory contains 'raw','/r/'" alert=boc order=1 type=application
+
+name="hacktool - empire useragent uri combo" rule="action = 'POST' && ((directory = '/admin/' && filename = 'get.php') || filename = 'news.php' || (directory = '/login/' && filename = 'process.php')) && (client = 'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko' || user.agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko')" alert=ioc order=1 type=application
+
+name="pua - advanced ip/port scanner update check" rule="filename = 'checkupdate.php' && query contains 'lng=' && query contains 'ver=' && query contains 'beta=' && query contains 'type=' && query contains 'rmode=' && query contains 'product='" alert=boc order=1 type=application
+
+name="f5 big-ip icontrol rest api command execution - proxy" rule="action = 'POST' && directory contains '/mgmt/tm/util' && filename = 'bash'" alert=boc order=1 type=application
+
+name="pwndrp access" rule="directory contains '/pwndrop/'" alert=ioc order=1 type=application
+
+name="suspicious cobalt strike dns beaconing - sysmon" rule="alias.host begins 'aaa.stage.','post.1.' || alias.host contains '.stage.123456.'" alert=ioc order=1 type=application
+
+name="dns query to visual studio code tunnels domain" rule="alias.host ends '.tunnels.api.visualstudio.com' || domain ends '.tunnels.api.visualstudio.com' || domain.dst ends '.tunnels.api.visualstudio.com' || url ends '.tunnels.api.visualstudio.com'" alert=boc order=1 type=application
+
+name="dns query request by quickassist.exe" rule="alias.host ends 'remoteassistance.support.services.microsoft.com' || domain ends 'remoteassistance.support.services.microsoft.com' || domain.dst ends 'remoteassistance.support.services.microsoft.com' || url ends 'remoteassistance.support.services.microsoft.com'" alert=boc order=1 type=application
+
+name="dns query tor .onion address - sysmon" rule="alias.host ends '.onion','.onion.ca','.onion.cab','.onion.casa','.onion.city','.onion.direct','.onion.dog','.onion.glass','.onion.gq','.onion.ink','.onion.it','.onion.link','.onion.lt','.onion.lu','.onion.nu','.onion.pet','.onion.plus','.onion.rip','.onion.sh','.onion.to','.onion.top','.hiddenservice.net','.s1.tor-gateways.de','.s2.tor-gateways.de','.s3.tor-gateways.de','.s4.tor-gateways.de','.s5.tor-gateways.de','.t2w.pw','.tor2web.ae.org','.tor2web.blutmagie.de','.tor2web.com','.tor2web.fi','.tor2web.io','.tor2web.org','.tor2web.xyz','.torlink.co'" alert=ioc order=1 type=application
+
+name="cloudflared tunnels related dns requests" rule="alias.host ends '.v2.argotunnel.com','protocol-v2.argotunnel.com','trycloudflare.com','update.argotunnel.com' || domain ends '.v2.argotunnel.com','protocol-v2.argotunnel.com','trycloudflare.com','update.argotunnel.com' || domain.dst ends '.v2.argotunnel.com','protocol-v2.argotunnel.com','trycloudflare.com','update.argotunnel.com' || url ends '.v2.argotunnel.com','protocol-v2.argotunnel.com','trycloudflare.com','update.argotunnel.com'" alert=boc order=1 type=application
+
+name="suspicious dns query indicating kerberos coercion via dns object spn spoofing" rule="alias.host contains 'UWhRCA' && alias.host contains 'BAAAA'" alert=ioc order=1 type=application
+
+name="dns query to common malware hosting and shortener services" rule="alias.host contains 'msapp.workers.dev','infinityfreeapp.com','my5353.com','reurl.cc','lihi.cc' || domain contains 'msapp.workers.dev','infinityfreeapp.com','my5353.com','reurl.cc','lihi.cc' || domain.dst contains 'msapp.workers.dev','infinityfreeapp.com','my5353.com','reurl.cc','lihi.cc' || url contains 'msapp.workers.dev','infinityfreeapp.com','my5353.com','reurl.cc','lihi.cc'" alert=boc order=1 type=application
+
+name="dns query to devtunnels domain" rule="alias.host ends '.devtunnels.ms' || domain ends '.devtunnels.ms' || domain.dst ends '.devtunnels.ms' || url ends '.devtunnels.ms'" alert=boc order=1 type=application
+
+name="dns query to mega hosting website" rule="alias.host contains 'userstorage.mega.co.nz' || domain contains 'userstorage.mega.co.nz' || domain.dst contains 'userstorage.mega.co.nz' || url contains 'userstorage.mega.co.nz'" alert=boc order=1 type=application
+
+name="dns query to remote access software domain from non-browser app" rule="alias.host ends 'agent.jumpcloud.com','agentreporting.atera.com','ammyy.com','api.parsec.app','api.playanext.com','api.splashtop.com','app.atera.com','assist.zoho.com','authentication.logmeininc.com','beyondtrustcloud.com','cdn.kaseya.net','client.teamviewer.com','comserver.corporate.beanywhere.com','control.connectwise.com','downloads.zohocdn.com','dwservice.net','express.gotoassist.com','getgo.com','getscreen.me','integratedchat.teamviewer.com','join.zoho.com','kickstart.jumpcloud.com','license.bomgar.com','logmein-gateway.com','logmein.com','logmeincdn.http.internapcdn.net','n-able.com','net.anydesk.com','netsupportsoftware.com','parsecusercontent.com','pubsub.atera.com','relay.kaseya.net','relay.screenconnect.com','relay.splashtop.com','remoteassistance.support.services.microsoft.com','remotedesktop-pa.googleapis.com','remoteutilities.com','secure.logmeinrescue.com','services.vnc.com','static.remotepc.com','swi-rc.com','swi-tc.com','tailscale.com','telemetry.servers.qetqo.com','tmate.io','twingate.com','zohoassist.com','ngrok.com','ninjaone.com','ninjarmm.com','fleetdeck.io','itarian.com','netbird.io','rustdesk.com','simple-help.com','syncromsp.com','todesk.com','zerotier.com','systemmonitor.co.uk','system-monitor.com','systemmonitor.us','logicnow.com','desktopcentral.manageengine.com','sunlogin.oray.com','client.oray.net','rmansys.ru','radmin.com','netsupportmanager.com','litemanager.ru','litemanager.com','dameware.com','pulseway.com','islonline.com','islonline.net','parallels.com','ultraviewer.net','tightvnc.com','supremocontrol.com','goverlan.com','naverisk.com' || domain ends 'agent.jumpcloud.com','agentreporting.atera.com','ammyy.com','api.parsec.app','api.playanext.com','api.splashtop.com','app.atera.com','assist.zoho.com','authentication.logmeininc.com','beyondtrustcloud.com','cdn.kaseya.net','client.teamviewer.com','comserver.corporate.beanywhere.com','control.connectwise.com','downloads.zohocdn.com','dwservice.net','express.gotoassist.com','getgo.com','getscreen.me','integratedchat.teamviewer.com','join.zoho.com','kickstart.jumpcloud.com','license.bomgar.com','logmein-gateway.com','logmein.com','logmeincdn.http.internapcdn.net','n-able.com','net.anydesk.com','netsupportsoftware.com','parsecusercontent.com','pubsub.atera.com','relay.kaseya.net','relay.screenconnect.com','relay.splashtop.com','remoteassistance.support.services.microsoft.com','remotedesktop-pa.googleapis.com','remoteutilities.com','secure.logmeinrescue.com','services.vnc.com','static.remotepc.com','swi-rc.com','swi-tc.com','tailscale.com','telemetry.servers.qetqo.com','tmate.io','twingate.com','zohoassist.com','ngrok.com','ninjaone.com','ninjarmm.com','fleetdeck.io','itarian.com','netbird.io','rustdesk.com','simple-help.com','syncromsp.com','todesk.com','zerotier.com','systemmonitor.co.uk','system-monitor.com','systemmonitor.us','logicnow.com','desktopcentral.manageengine.com','sunlogin.oray.com','client.oray.net','rmansys.ru','radmin.com','netsupportmanager.com','litemanager.ru','litemanager.com','dameware.com','pulseway.com','islonline.com','islonline.net','parallels.com','ultraviewer.net','tightvnc.com','supremocontrol.com','goverlan.com','naverisk.com' || domain.dst ends 'agent.jumpcloud.com','agentreporting.atera.com','ammyy.com','api.parsec.app','api.playanext.com','api.splashtop.com','app.atera.com','assist.zoho.com','authentication.logmeininc.com','beyondtrustcloud.com','cdn.kaseya.net','client.teamviewer.com','comserver.corporate.beanywhere.com','control.connectwise.com','downloads.zohocdn.com','dwservice.net','express.gotoassist.com','getgo.com','getscreen.me','integratedchat.teamviewer.com','join.zoho.com','kickstart.jumpcloud.com','license.bomgar.com','logmein-gateway.com','logmein.com','logmeincdn.http.internapcdn.net','n-able.com','net.anydesk.com','netsupportsoftware.com','parsecusercontent.com','pubsub.atera.com','relay.kaseya.net','relay.screenconnect.com','relay.splashtop.com','remoteassistance.support.services.microsoft.com','remotedesktop-pa.googleapis.com','remoteutilities.com','secure.logmeinrescue.com','services.vnc.com','static.remotepc.com','swi-rc.com','swi-tc.com','tailscale.com','telemetry.servers.qetqo.com','tmate.io','twingate.com','zohoassist.com','ngrok.com','ninjaone.com','ninjarmm.com','fleetdeck.io','itarian.com','netbird.io','rustdesk.com','simple-help.com','syncromsp.com','todesk.com','zerotier.com','systemmonitor.co.uk','system-monitor.com','systemmonitor.us','logicnow.com','desktopcentral.manageengine.com','sunlogin.oray.com','client.oray.net','rmansys.ru','radmin.com','netsupportmanager.com','litemanager.ru','litemanager.com','dameware.com','pulseway.com','islonline.com','islonline.net','parallels.com','ultraviewer.net','tightvnc.com','supremocontrol.com','goverlan.com','naverisk.com' || url ends 'agent.jumpcloud.com','agentreporting.atera.com','ammyy.com','api.parsec.app','api.playanext.com','api.splashtop.com','app.atera.com','assist.zoho.com','authentication.logmeininc.com','beyondtrustcloud.com','cdn.kaseya.net','client.teamviewer.com','comserver.corporate.beanywhere.com','control.connectwise.com','downloads.zohocdn.com','dwservice.net','express.gotoassist.com','getgo.com','getscreen.me','integratedchat.teamviewer.com','join.zoho.com','kickstart.jumpcloud.com','license.bomgar.com','logmein-gateway.com','logmein.com','logmeincdn.http.internapcdn.net','n-able.com','net.anydesk.com','netsupportsoftware.com','parsecusercontent.com','pubsub.atera.com','relay.kaseya.net','relay.screenconnect.com','relay.splashtop.com','remoteassistance.support.services.microsoft.com','remotedesktop-pa.googleapis.com','remoteutilities.com','secure.logmeinrescue.com','services.vnc.com','static.remotepc.com','swi-rc.com','swi-tc.com','tailscale.com','telemetry.servers.qetqo.com','tmate.io','twingate.com','zohoassist.com','ngrok.com','ninjaone.com','ninjarmm.com','fleetdeck.io','itarian.com','netbird.io','rustdesk.com','simple-help.com','syncromsp.com','todesk.com','zerotier.com','systemmonitor.co.uk','system-monitor.com','systemmonitor.us','logicnow.com','desktopcentral.manageengine.com','sunlogin.oray.com','client.oray.net','rmansys.ru','radmin.com','netsupportmanager.com','litemanager.ru','litemanager.com','dameware.com','pulseway.com','islonline.com','islonline.net','parallels.com','ultraviewer.net','tightvnc.com','supremocontrol.com','goverlan.com','naverisk.com'" alert=boc order=1 type=application
+
+name="dns query to ufile.io" rule="alias.host contains 'ufile.io' || domain contains 'ufile.io' || domain.dst contains 'ufile.io' || url contains 'ufile.io'" alert=boc order=1 type=application
+
+name="wannacry killswitch domain" rule="alias.host = 'ifferfsodp9ifjaposdfjhgosurijfaewrwergwea.testing','ifferfsodp9ifjaposdfjhgosurijfaewrwergwea.test','ifferfsodp9ifjaposdfjhgosurijfaewrwergwea.com','ayylmaotjhsstasdfasdfasdfasdfasdfasdfasdf.com','iuqssfsodp9ifjaposdfjhgosurijfaewrwergwea.com' || domain = 'ifferfsodp9ifjaposdfjhgosurijfaewrwergwea.testing','ifferfsodp9ifjaposdfjhgosurijfaewrwergwea.test','ifferfsodp9ifjaposdfjhgosurijfaewrwergwea.com','ayylmaotjhsstasdfasdfasdfasdfasdfasdfasdf.com','iuqssfsodp9ifjaposdfjhgosurijfaewrwergwea.com' || domain.dst = 'ifferfsodp9ifjaposdfjhgosurijfaewrwergwea.testing','ifferfsodp9ifjaposdfjhgosurijfaewrwergwea.test','ifferfsodp9ifjaposdfjhgosurijfaewrwergwea.com','ayylmaotjhsstasdfasdfasdfasdfasdfasdfasdf.com','iuqssfsodp9ifjaposdfjhgosurijfaewrwergwea.com' || url = 'ifferfsodp9ifjaposdfjhgosurijfaewrwergwea.testing','ifferfsodp9ifjaposdfjhgosurijfaewrwergwea.test','ifferfsodp9ifjaposdfjhgosurijfaewrwergwea.com','ayylmaotjhsstasdfasdfasdfasdfasdfasdfasdf.com','iuqssfsodp9ifjaposdfjhgosurijfaewrwergwea.com'" alert=ioc order=1 type=application
+
+name="monero crypto coin mining pool lookup" rule="alias.host contains 'minexmr.com','supportxmr.com','c3pool.com','nanopool.org','2miners.com','hashcity.org','f2pool.com','xmrpool.eu','hashvault.pro' || domain contains 'minexmr.com','supportxmr.com','c3pool.com','nanopool.org','2miners.com','hashcity.org','f2pool.com','xmrpool.eu','hashvault.pro' || domain.dst contains 'minexmr.com','supportxmr.com','c3pool.com','nanopool.org','2miners.com','hashcity.org','f2pool.com','xmrpool.eu','hashvault.pro' || url contains 'minexmr.com','supportxmr.com','c3pool.com','nanopool.org','2miners.com','hashcity.org','f2pool.com','xmrpool.eu','hashvault.pro'" alert=boc order=1 type=application
+
+name="dns tor proxies" rule="alias.host ends '.hiddenservice.net','.onion.ca','.onion.cab','.onion.casa','.onion.city','.onion.direct','.onion.dog','.onion.glass','.onion.gq','.onion.guide','.onion.in.net','.onion.ink','.onion.it','.onion.link','.onion.lt','.onion.lu','.onion.ly','.onion.mn','.onion.network','.onion.nu','.onion.pet','.onion.plus','.onion.pt','.onion.pw','.onion.rip','.onion.sh','.onion.si','.onion.to','.onion.top','.onion.ws','.onion','.s1.tor-gateways.de','.s2.tor-gateways.de','.s3.tor-gateways.de','.s4.tor-gateways.de','.s5.tor-gateways.de','.t2w.pw','.tor2web.ae.org','.tor2web.blutmagie.de','.tor2web.com','.tor2web.fi','.tor2web.io','.tor2web.org','.tor2web.xyz','.torlink.co'" alert=boc order=1 type=application
+
+name="http request to low reputation tld or suspicious file extension" rule="extension = 'bat','bin','cmd','cpl','dll','dylib','elf','exe','hta','iso','jar','js','lnk','msi','pif','ps1','py','reg','scr','sh','so','vbs','wsf' && (alias.host ends '.bid','.by','.cf','.click','.cm','.ga','.gq','.ir','.kp','.loan','.ml','.mm','.party','.pw','.ru','.su','.sy','.tk','.top','.tv','.ve','.work','.xyz' || domain ends '.bid','.by','.cf','.click','.cm','.ga','.gq','.ir','.kp','.loan','.ml','.mm','.party','.pw','.ru','.su','.sy','.tk','.top','.tv','.ve','.work','.xyz' || domain.dst ends '.bid','.by','.cf','.click','.cm','.ga','.gq','.ir','.kp','.loan','.ml','.mm','.party','.pw','.ru','.su','.sy','.tk','.top','.tv','.ve','.work','.xyz' || url ends '.bid','.by','.cf','.click','.cm','.ga','.gq','.ir','.kp','.loan','.ml','.mm','.party','.pw','.ru','.su','.sy','.tk','.top','.tv','.ve','.work','.xyz')" alert=boc order=1 type=application
+
+name="new kind of network (nkn) detection" rule="(alias.host contains 'seed' && alias.host contains '.nkn.org') || (domain contains 'seed' && domain contains '.nkn.org') || (domain.dst contains 'seed' && domain.dst contains '.nkn.org') || (url contains 'seed' && url contains '.nkn.org')" alert=boc order=1 type=application
+
+name="executable from webdav" rule="extension = 'exe' && ((client contains 'webdav' || directory contains 'webdav') || (user.agent contains 'webdav' || directory contains 'webdav'))" alert=boc order=1 type=application
+
+name="dns events related to mining pools" rule="alias.host ends 'monerohash.com','do-dear.com','xmrminerpro.com','secumine.net','xmrpool.com','minexmr.org','hashanywhere.com','xmrget.com','mininglottery.eu','minergate.com','moriaxmr.com','multipooler.com','moneropools.com','xmrpool.eu','coolmining.club','supportxmr.com','minexmr.com','hashvault.pro','xmrpool.net','crypto-pool.fr','xmr.pt','miner.rocks','walpool.com','herominers.com','gntl.co.uk','semipool.com','coinfoundry.org','cryptoknight.cc','fairhash.org','baikalmine.com','tubepool.xyz','fairpool.xyz','asiapool.io','coinpoolit.webhop.me','nanopool.org','moneropool.com','miner.center','prohash.net','poolto.be','cryptoescrow.eu','monerominers.net','cryptonotepool.org','extrmepool.org','webcoin.me','kippo.eu','hashinvest.ws','monero.farm','linux-repository-updates.com','1gh.com','dwarfpool.com','hash-to-coins.com','pool-proxy.com','hashfor.cash','fairpool.cloud','litecoinpool.org','mineshaft.ml','abcxyz.stream','moneropool.ru','cryptonotepool.org.uk','extremepool.org','extremehash.com','hashinvest.net','unipool.pro','crypto-pools.org','monero.net','backup-pool.com','freeyy.me','cryptonight.net','shscrypto.net' || domain ends 'monerohash.com','do-dear.com','xmrminerpro.com','secumine.net','xmrpool.com','minexmr.org','hashanywhere.com','xmrget.com','mininglottery.eu','minergate.com','moriaxmr.com','multipooler.com','moneropools.com','xmrpool.eu','coolmining.club','supportxmr.com','minexmr.com','hashvault.pro','xmrpool.net','crypto-pool.fr','xmr.pt','miner.rocks','walpool.com','herominers.com','gntl.co.uk','semipool.com','coinfoundry.org','cryptoknight.cc','fairhash.org','baikalmine.com','tubepool.xyz','fairpool.xyz','asiapool.io','coinpoolit.webhop.me','nanopool.org','moneropool.com','miner.center','prohash.net','poolto.be','cryptoescrow.eu','monerominers.net','cryptonotepool.org','extrmepool.org','webcoin.me','kippo.eu','hashinvest.ws','monero.farm','linux-repository-updates.com','1gh.com','dwarfpool.com','hash-to-coins.com','pool-proxy.com','hashfor.cash','fairpool.cloud','litecoinpool.org','mineshaft.ml','abcxyz.stream','moneropool.ru','cryptonotepool.org.uk','extremepool.org','extremehash.com','hashinvest.net','unipool.pro','crypto-pools.org','monero.net','backup-pool.com','freeyy.me','cryptonight.net','shscrypto.net' || domain.dst ends 'monerohash.com','do-dear.com','xmrminerpro.com','secumine.net','xmrpool.com','minexmr.org','hashanywhere.com','xmrget.com','mininglottery.eu','minergate.com','moriaxmr.com','multipooler.com','moneropools.com','xmrpool.eu','coolmining.club','supportxmr.com','minexmr.com','hashvault.pro','xmrpool.net','crypto-pool.fr','xmr.pt','miner.rocks','walpool.com','herominers.com','gntl.co.uk','semipool.com','coinfoundry.org','cryptoknight.cc','fairhash.org','baikalmine.com','tubepool.xyz','fairpool.xyz','asiapool.io','coinpoolit.webhop.me','nanopool.org','moneropool.com','miner.center','prohash.net','poolto.be','cryptoescrow.eu','monerominers.net','cryptonotepool.org','extrmepool.org','webcoin.me','kippo.eu','hashinvest.ws','monero.farm','linux-repository-updates.com','1gh.com','dwarfpool.com','hash-to-coins.com','pool-proxy.com','hashfor.cash','fairpool.cloud','litecoinpool.org','mineshaft.ml','abcxyz.stream','moneropool.ru','cryptonotepool.org.uk','extremepool.org','extremehash.com','hashinvest.net','unipool.pro','crypto-pools.org','monero.net','backup-pool.com','freeyy.me','cryptonight.net','shscrypto.net' || url ends 'monerohash.com','do-dear.com','xmrminerpro.com','secumine.net','xmrpool.com','minexmr.org','hashanywhere.com','xmrget.com','mininglottery.eu','minergate.com','moriaxmr.com','multipooler.com','moneropools.com','xmrpool.eu','coolmining.club','supportxmr.com','minexmr.com','hashvault.pro','xmrpool.net','crypto-pool.fr','xmr.pt','miner.rocks','walpool.com','herominers.com','gntl.co.uk','semipool.com','coinfoundry.org','cryptoknight.cc','fairhash.org','baikalmine.com','tubepool.xyz','fairpool.xyz','asiapool.io','coinpoolit.webhop.me','nanopool.org','moneropool.com','miner.center','prohash.net','poolto.be','cryptoescrow.eu','monerominers.net','cryptonotepool.org','extrmepool.org','webcoin.me','kippo.eu','hashinvest.ws','monero.farm','linux-repository-updates.com','1gh.com','dwarfpool.com','hash-to-coins.com','pool-proxy.com','hashfor.cash','fairpool.cloud','litecoinpool.org','mineshaft.ml','abcxyz.stream','moneropool.ru','cryptonotepool.org.uk','extremepool.org','extremehash.com','hashinvest.net','unipool.pro','crypto-pools.org','monero.net','backup-pool.com','freeyy.me','cryptonight.net','shscrypto.net'" alert=boc order=1 type=application
+
+name="cisco asa exploitation activity - proxy" rule="action = 'GET' && directory contains '+CSCOU+','+CSCOL+' && filename = 'MacTunnelStart.jar','csvrloader64.cab','csvrloader.jar'" alert=ioc order=1 type=application
+
+name="katz stealer suspicious user-agent" rule="client contains 'katz-ontop' || user.agent contains 'katz-ontop'" alert=ioc order=1 type=application
+
+name="dns query to katz stealer domains - network" rule="alias.host contains 'katz-panel.com','katz-stealer.com','katzstealer.com','twist2katz.com' || domain contains 'katz-panel.com','katz-stealer.com','katzstealer.com','twist2katz.com' || domain.dst contains 'katz-panel.com','katz-stealer.com','katzstealer.com','twist2katz.com' || url contains 'katz-panel.com','katz-stealer.com','katzstealer.com','twist2katz.com'" alert=ioc order=1 type=application
+
+name="potential owassrf exploitation attempt - proxy" rule="action = 'POST' && directory contains '/owa/' && (directory contains '/powershell' || query contains '/powershell') && query contains '@','%40'" alert=boc order=1 type=application
+
+name="comrat network communication" rule="directory contains '/index/' && filename = 'index.php' && query begins 'h='" alert=ioc order=1 type=application
+
+name="potential cve-2023-36884 exploitation - url marker" rule="action = 'GET' && directory contains '/MSHTML_C7/'" alert=ioc order=1 type=application
+
+name="potential cve-2023-36884 exploitation - file downloads" rule="action = 'GET' && filename = 'ex001.url','file001.search-ms','file001.url','file001.vbs','file1.mht','o2010.asp','redir_obj.html','RFile.asp','zip_k.asp','zip_k2.asp','zip_k3.asp'" alert=ioc order=1 type=application
+
+name="cve-2023-22518 exploitation attempt - vulnerable endpoint connection (proxy)" rule="action = 'POST' && filename = 'setup-restore-local.action','setup-restore-progress.action','setup-restore.action','server-info.action','setupadministrator.action'" alert=boc order=1 type=application
+
+name="potential information disclosure cve-2023-43261 exploitation - proxy" rule="action = 'GET' && directory contains '/lang/log' && filename contains 'httpd.log'" alert=eoc order=1 type=application
+
+name="cve-2023-4966 potential exploitation attempt - citrix adc sensitive information disclosure - proxy" rule="filename = 'openid-configuration' && ((action = 'GET' && directory contains '/oauth/idp/.well-known') || (directory contains '/oauth/idp/.well-known/openid-configuration' && alias.host length 150-u))" alert=boc order=1 type=application
+
+name="potential peach sandstorm apt c2 communication activity" rule="action = 'GET' && directory = '/api/Core/Command' && filename = 'Init','Restart'" alert=boc order=1 type=application
+
+name="small sieve malware potential c2 communication" rule="action = 'GET' && alias.host = 'api.telegram.org' && query contains 'chat_id=2090761833' && query contains 'text=com/'" alert=ioc order=1 type=application
+
+name="devil bait potential c2 communication traffic" rule="action = 'GET' && filename = 'cross.php' && query contains 'op=' && query contains 'dt=' && query contains 'uid='" alert=boc order=1 type=application
+
+name="chafer malware url pattern" rule="filename = 'asp.asp' && query contains 'ui='" alert=boc order=1 type=application
+
+name=".class extension uri ending request" rule="extension = 'class'" alert=boc order=1 type=application
+
+name="windows webshell strings" rule="action = 'GET' && query contains '=whoami','=net%20user','=net+user','=net%2Buser','=cmd%20/c%','=cmd+/c+','=cmd%2B/c%','=cmd%20/r%','=cmd+/r+','=cmd%2B/r%','=cmd%20/k%','=cmd+/k+','=cmd%2B/k%','=powershell%','=powershell+','=tasklist%','=tasklist+','=wmic%','=wmic+','=ssh%','=ssh+','=python%','=python+','=python3%','=python3+','=ipconfig','=wget%','=wget+','=curl%','=curl+','=certutil','=copy%20%5C%5C','=dsquery%','=dsquery+','=nltest%','=nltest+'" alert=boc order=1 type=application
+
+name="jndiexploit pattern" rule="directory contains '/Basic/Command/Base64/','/Basic/ReverseShell/','/Deserialization/URLDNS/','/Deserialization/CommonsCollections1/Dnslog/','/Deserialization/CommonsCollections2/Command/Base64/','/Deserialization/CommonsBeanutils1/ReverseShell/','/TomcatBypass/Dnslog/','/TomcatBypass/Command/','/TomcatBypass/ReverseShell/','/GroovyBypass/Command/','/WebsphereBypass/Upload/'" alert=ioc order=1 type=application
+
+name="successful iis shortname fuzzing scan" rule="action = 'GET','OPTIONS' && query contains '~1' && query ends 'a.aspx'" alert=boc order=1 type=application
+
+name="source code enumeration detection by keyword" rule="directory contains '.git/'" alert=boc order=1 type=application
+
+name="webshell regeorg detection via web logs" rule="action = 'POST' && query contains 'cmd=connect','cmd=disconnect','cmd=forward','cmd=read','connect&target'" alert=boc order=1 type=application
+
+name="path traversal exploitation attempts" rule="query contains '../../../../../lib/password','../../../../windows/','../../../etc/','..%252f..%252f..%252fetc%252f','..%c0%af..%c0%af..%c0%afetc%c0%af','%252e%252e%252fetc%252f','../../../../etc/passwd','../../../../windows/win.ini','..%2f..%2f..%2fetc%2f','..%5c..%5c..%5cwindows','.....//....//etc','.....//....//windows'" alert=boc order=1 type=application
+
+name="suspicious windows strings in uri" rule="query contains '=C:/Users','=C:/Program%20Files','=C:/Windows','=C%3A%5CUsers','=C%3A%5CProgram%20Files','=C%3A%5CWindows'" alert=boc order=1 type=application
+
+name="cve-2010-5278 exploitation attempt" rule="directory = '/manager/controllers/default/resource' && filename = 'tvs.php' && query contains 'win.ini'" alert=ioc order=1 type=application
+
+name="rejetto http file server rce" rule="query contains '%00{.' && query contains 'save|','powershell','cmd.exe','cmd /c','cmd /r','cmd /k','cscript','wscript','python','C:\\\\Users\\\\Public\\\\','%comspec%'" alert=ioc order=1 type=application
+
+name="sharepoint toolshell cve-2025-53770 exploitation - web iis" rule="(action = 'get' && directory contains '/_layouts/15/' && filename = 'spinstall0.aspx' || action = 'post' && directory contains '/_layouts/15/toolpane.aspx' && query contains 'displaymode=edit&a=/toolpane.aspx') && referer contains '/_layouts/signout.aspx'" alert=ioc order=1 type=application
+
+name="potential java webshell upload in sap netviewer server" rule="action = 'POST' && directory contains '/irj/' && directory contains '.jsp' && extension = 'class','java','jsp'" alert=boc order=1 type=application
+
+name="potential sap netviewer webshell command execution" rule="directory contains '/irj/' && extension = 'jsp' && (query begins 'cmd=','command=','exec_cmd=','exec=' || query contains '/dev/tcp','/etc/passwd','%2fdev%2ftcp','%2fetc%2fpasswd','=uname','=whoami','ifconfig','ping','pwd' || (query contains 'echo' && query contains 'base64'))" alert=ioc order=1 type=application
+
+name="potential exploitation of cve-2025-4427/4428 ivanti epmm pre-auth rce" rule="directory contains '/mifs/rs/api/v2/featureusage' && query contains 'format=' && (query contains '{7*7}','%7B7*7%7D','%7b7%2a7%7d' || (query contains 'java.lang.Runtime' && query contains '.getMethod' && query contains 'getRuntime' && query contains '.exec(') || (query contains 'java%2elang%2eRuntime' && query contains '%2egetMethod' && query contains '%2eexec%28') || query contains '%6a%61%76%61%2e%6c%61%6e%67%2e%52%75%6e%74%69%6d%65%65%28%29','%67%65%74%52%75%6e%74%69%6d%65','%2e%65%78%65%63%28')" alert=ioc order=1 type=application
+
+name="potential cve-2022-21587 exploitation attempt" rule="action = 'POST' && directory contains '/OA_HTML/' && filename = 'BneViewerXMLService','BneUploaderService','BneDownloadService','BneOfflineLOVService' && query contains 'bne:uueupload=TRUE'" alert=ioc order=1 type=application
+
+name="atlassian bitbucket command injection via archive api" rule="directory contains '/rest/api/latest/projects/' && query contains 'prefix=' && query contains '%00--exec'" alert=ioc order=1 type=application
+
+name="cve-2022-31656 vmware workspace one access auth bypass" rule="directory contains '/SAAS/t/_/;/'" alert=ioc order=1 type=application
+
+name="apache spark shell command injection - weblogs" rule="query contains 'doAs=`','doAs=%60'" alert=boc order=1 type=application
+
+name="zimbra collaboration suite email server unauthenticated rce" rule="action = 'POST' && filename = 'mboximport' && query contains 'account-name' && query contains 'ow' && query contains 'no-switch' && query contains 'append'" alert=boc order=1 type=application
+
+name="owassrf exploitation attempt using public poc - webserver" rule="action = 'POST' && directory contains '/owa/mastermailbox' && directory contains '/powershell'" alert=boc order=1 type=application
+
+name="potential centos web panel exploitation attempt - cve-2022-44877" rule="action = 'POST' && directory contains '/login/' && filename = 'index.php' && query contains 'login=$(','base64','subprocess','socket','${IFS}','cHl0aG9u','B5dGhvb','weXRob2'" alert=boc order=1 type=application
+
+name="potential cve-2022-46169 exploitation attempt" rule="action = 'GET' && filename = 'remote_agent.php' && query contains 'action=polldata' && query contains 'poller_id=' && query contains '`whoami','wget','base64 -d','cmd','powershell'" alert=boc order=1 type=application
+
+name="cve-2020-0688 exploitation attempt" rule="directory contains '/ecp/' && filename = 'default.aspx' && query contains '__VIEWSTATEGENERATOR=' && query contains '__VIEWSTATE='" alert=boc order=1 type=application
+
+name="terramaster tos cve-2020-28188" rule="action = 'GET' && directory contains '/include' && filename = 'makecvs.php' && query contains 'Event=' && query contains 'curl','wget','.py','.sh','chmod','_GET'" alert=boc order=1 type=application
+
+name="cve-2020-5902 f5 big-ip exploitation attempt" rule="directory contains '/tmui/','/hsqldb' && directory contains '..;/','.jsp/..'" alert=boc order=1 type=application
+
+name="oracle weblogic exploit cve-2020-14882" rule="directory contains '/console/images/%252E%252E%252F','/console/css/%2e' && filename = 'console.portal'" alert=ioc order=1 type=application
+
+name="citrix ads exploitation cve-2020-8193 cve-2020-8195" rule="(filename = 'filedownload' && directory contains 'rapi' && query contains 'filter=path:%2f') || (filename = 'report' && directory contains 'pcidss' && query contains 'type=all_signatures' && query contains 'sig_name=_default_signature_')" alert=ioc order=1 type=application
+
+name="cisco asa ftd exploit cve-2020-3452" rule="directory contains '+CSCOT+' && filename = 'translation-table','oem-customization' && query contains '&textdomain=/','&textdomain=%','&name=/','&name=%'" alert=ioc order=1 type=application
+
+name="solarwinds supernova webshell access" rule="filename contains 'logoimagehandler.ashx' && query contains 'clazz'" alert=ioc order=1 type=application
+
+name="potential cve-2023-46214 exploitation attempt" rule="action = 'POST' && query contains 'NO_BINARY_CHECK=1' && query contains 'input.path' && query ends '.xsl'" alert=ioc order=1 type=application
+
+name="exploitation attempt of cve-2023-46214 using public poc code" rule="action = 'POST' && ((directory contains '/splunkd/__upload/indexing' && filename = 'preview' && query contains 'NO_BINARY_CHECK=1' && query contains 'input.path=shell.xsl') || (directory contains '/api/search/jobs' && filename = 'results' && query contains '/opt/splunk/var/run/splunk/dispatch/' && query contains '/shell.xsl'))" alert=ioc order=1 type=application
+
+name="potential cve-2023-25717 exploitation attempt" rule="action = 'GET' && directory contains '/forms' && filename = 'doLogin' && query contains 'login_username' && query contains 'password' && query contains '$(','%24%28'" alert=ioc order=1 type=application
+
+name="cve-2023-22518 exploitation attempt - vulnerable endpoint connection (webserver)" rule="action = 'POST' && filename contains 'setup-restore-local.action','setup-restore-progress.action','setup-restore.action','server-info.action','setupadministrator.action'" alert=boc order=1 type=application
+
+name="potential information disclosure cve-2023-43261 exploitation - web" rule="action = 'GET' && directory contains '/lang/log' && filename contains 'httpd.log'" alert=eoc order=1 type=application
+
+name="potential cve-2023-23752 exploitation attempt" rule="action = 'GET' && directory contains '/api/index.php/v1/' && query contains 'public=true'" alert=ioc order=1 type=application
+
+name="potential cve-2023-25157 exploitation attempt" rule="action = 'GET' && directory contains '/geoserver' && filename = 'ows' && query contains 'CQL_FILTER=' && query contains 'PropertyIsLike','strEndsWith','strStartsWith','FeatureId','jsonArrayContains','DWithin' && query contains '+--','+AS+','+OR+','FROM','ORDER+BY','SELECT','sleep%28','substring%28','UNION','WHERE'" alert=ioc order=1 type=application
+
+name="moveit cve-2023-34362 exploitation attempt - potential web shell request" rule="action = 'GET' && filename = 'human2.aspx','_human2.aspx'" alert=ioc order=1 type=application
+
+name="cve-2024-1709 - screenconnect authentication bypass exploitation" rule="directory contains '/SetupWizard.aspx/'" alert=ioc order=1 type=application
+
+name="cve-2024-1212 exploitation - progress kemp loadmaster unauthenticated command injection" rule="action = 'GET' && directory contains '/access/' && filename = 'set' && query contains 'param=enableapi' && query contains 'value=1'" alert=boc order=1 type=application
+
+name="potential cve-2021-27905 exploitation attempt" rule="directory contains '/solr/' && ((directory contains '/debug/' && filename = 'dump' && query contains 'param=ContentStream') || (action = 'GET' && filename = 'replication' && query contains 'command=fetchindex' && query contains 'masterUrl='))" alert=boc order=1 type=application
+
+name="cve-2021-21972 vsphere exploitation" rule="action = 'POST' && directory contains '/vropspluginui/rest/services/' && filename = 'uploadova'" alert=ioc order=1 type=application
+
+name="exploitation of cve-2021-26814 in wazuh" rule="directory contains '/manager/' && filename = 'files' && query contains 'path=etc/lists/../../../../..'" alert=ioc order=1 type=application
+
+name="cve-2021-21978 exploitation attempt" rule="action = 'POST' && filename = 'wsgi_log_upload.py' && query contains 'logupload' && query contains 'logMetaData'" alert=ioc order=1 type=application
+
+name="oracle weblogic exploit cve-2021-2109" rule="action = 'GET' && query contains 'com.bea.console.handles.JndiBindingHandle' && query contains 'ldap://' && query contains 'AdminServer'" alert=ioc order=1 type=application
+
+name="potential cve-2021-26084 exploitation attempt" rule="action='POST' && filename = 'createpage-entervariables.action' && query contains 'SpaceKey=x'" alert=ioc order=1 type=application
+
+name="sonicwall ssl/vpn jarrewrite exploitation" rule="filename = 'jarrewrite.sh' && (client contains ':;','() {','/bin/bash -c' || user.agent contains ':;','() {','/bin/bash -c')" alert=ioc order=1 type=application
+
+name="proxylogon reset virtual directories based on iis log" rule="action='POST' && directory contains 'DDIService.svc' && filename = 'SetObject' && query contains 'schema=Reset' && query contains 'VirtualDirectory'" alert=ioc order=1 type=application
+
+name="arcadyan router exploitations" rule="directory contains '..%2f' && directory contains '/setup_top_login.htm','/login.html','/loginerror.html','/loginexclude.html','/loginlock.html'" alert=boc order=1 type=application
+
+name="vmware vcenter server file upload cve-2021-22005" rule="action = 'POST' && directory contains '/analytics/telemetry/ph/api/hyper/send'" alert=boc order=1 type=application

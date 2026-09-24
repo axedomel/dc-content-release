@@ -1,0 +1,1 @@
+name="Inbound Service OTHER" rule="service = 0 && direction = 'inbound' && tcp.flags.desc = 'syn' && tcp.flags.desc = 'ack'" alert=boc order=1 type=application

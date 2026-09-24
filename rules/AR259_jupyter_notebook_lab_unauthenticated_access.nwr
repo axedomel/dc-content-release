@@ -1,0 +1,1 @@
+name="jupyter notebook/lab unauthenticated access" rule="action = 'get' && (directory contains 'lab/api/settings' || directory ends 'ipython/tree')" alert=eoc order=1 type=application

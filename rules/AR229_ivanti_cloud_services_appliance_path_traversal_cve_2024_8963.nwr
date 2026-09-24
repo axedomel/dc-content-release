@@ -1,0 +1,1 @@
+name="ivanti cloud services appliance path traversal (cve-2024-8963)" rule="directory contains 'client/index.php%3f.php/gsb/users.php'" alert=boc order=1 type=application

@@ -1,0 +1,1 @@
+name="ivanti connect secure path-traversal auth bypass" rule="(directory contains 'totp/user-backup-code' && directory contains 'system/maintenance/archiving/cloud-server-test-connection','license/keys-status','system/system-information') || (action = 'post' && directory contains 'api/v1/cav/client/' && filename = 'categories')" alert=boc order=1 type=application

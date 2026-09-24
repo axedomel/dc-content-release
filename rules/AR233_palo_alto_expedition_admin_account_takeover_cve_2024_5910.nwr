@@ -1,0 +1,1 @@
+name="palo alto expedition admin account takeover (cve-2024-5910)" rule="directory contains 'os/startup/restore/restoreadmin.php'" alert=boc order=1 type=application

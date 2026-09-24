@@ -1,0 +1,1 @@
+name="llm no user agent" rule="(threat.category = 'llm-provider','llm-enterprise','llm-coding') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && analysis.service = 'http no user-agent'" alert=boc order=1 type=application

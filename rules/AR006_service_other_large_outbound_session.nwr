@@ -1,0 +1,1 @@
+name="Large Outbound Service OTHER Sessions" rule="service = 0 && direction = 'outbound' && tcp.flags.desc = 'syn' && tcp.flags.desc = 'ack' && size = 1000000-u" alert=boc order=1 type=application

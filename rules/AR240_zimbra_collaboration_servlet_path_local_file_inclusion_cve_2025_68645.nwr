@@ -1,0 +1,1 @@
+name="zimbra collaboration servlet_path local file inclusion (cve-2025-68645)" rule="query contains 'javax.servlet.include.servlet_path=/web-inf/'" alert=boc order=1 type=application

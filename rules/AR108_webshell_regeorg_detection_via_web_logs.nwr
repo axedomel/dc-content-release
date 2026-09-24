@@ -1,0 +1,1 @@
+name="webshell regeorg detection via web logs" rule="action = 'POST' && query contains 'cmd=connect','cmd=disconnect','cmd=forward','cmd=read','connect&target'" alert=boc order=1 type=application

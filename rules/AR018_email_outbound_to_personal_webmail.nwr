@@ -1,0 +1,1 @@
+name="Outbound Mail to Personal Webmail Domains" rule="direction = 'outbound' && email.dst ends '@gmail.com','@yahoo.com','@outlook.com','@hotmail.com','@protonmail.com','@icloud.com','@mail.ru','@qq.com'" alert=boc order=1 type=application

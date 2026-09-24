@@ -1,0 +1,1 @@
+name="cisco ios privileged exec-via-http legacy endpoint abuse" rule="direction = 'inbound' && directory contains 'level/15/exec'" alert=eoc order=1 type=application

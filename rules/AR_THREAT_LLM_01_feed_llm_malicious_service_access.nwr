@@ -1,0 +1,1 @@
+name="llm malicious service access" rule="threat.category = 'llm-malicious' && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128)" alert=ioc order=1 type=application
