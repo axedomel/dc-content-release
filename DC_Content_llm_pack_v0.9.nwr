@@ -4,7 +4,7 @@ name="llm c2 beacon pattern" rule="(threat.category = 'llm-provider','llm-enterp
 
 name="llm browser access" rule="(threat.category = 'llm-provider','llm-enterprise','llm-coding') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && client contains 'Mozilla/'" alert=eoc order=1 type=application
 
-name="llm api non browser" rule="(threat.category = 'llm-provider','llm-enterprise','llm-coding') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && client exists && NOT client contains 'Mozilla/'" alert=boc order=1 type=application
+name="llm api non browser" rule="(threat.category = 'llm-provider','llm-enterprise','llm-coding') && (tcp.dstport = 443 || tcp.dstport = 80 || tcp.dstport = 8080 || tcp.dstport = 8443 || tcp.dstport = 3128) && client exists && not(client contains 'Mozilla/')" alert=boc order=1 type=application
 
 name="llm plaintext http" rule="(threat.category = 'llm-provider','llm-enterprise','llm-coding') && tcp.dstport = 80" alert=eoc order=1 type=application
 
