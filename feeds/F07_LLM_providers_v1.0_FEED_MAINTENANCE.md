@@ -78,12 +78,16 @@ pozostają w CSV jako historyczny kontekst dla śledztw.
 ## Format CSV
 
 ```
-host,threat.category,threat.desc,threat.source
 api.newprovider.com,llm-provider,NewProvider API,nw-llm-v0.9
 ```
+(kolumny w tej kolejności: host, threat.category, threat.desc, threat.source
+— odpowiada mapowaniu Match Key/Meta Key 1-3 w kreatorze feeda)
 
 - Brak wildcardów — tylko pełne FQDN
-- Brak nagłówka przy imporcie w starszych wersjach NW (sprawdź wersję)
+- **Żadnego wiersza nagłówka** — potwierdzone na żywo 2026-09-25, import z
+  nagłówkiem się wywala/psuje. Nie tylko "starsze wersje NW" jak wcześniej
+  ostrożnie zakładano — dotyczy zawsze. F07_LLM_providers_v1.0.csv w tym
+  repo ma to już poprawione.
 - Komentarze (#) — pomijane przez parser NW od v12.3+
 - threat.source = wersja pliku (pozwala filtrować w Investigate)
 

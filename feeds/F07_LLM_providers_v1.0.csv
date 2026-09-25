@@ -1,4 +1,3 @@
-host,threat.category,threat.desc,threat.source
 about.meta.com,llm-provider,meta,nw-llm-v1.0
 about.sourcegraph.com,llm-coding,sourcegraph cody,nw-llm-v1.0
 adept.ai,llm-provider,adept ai,nw-llm-v1.0
